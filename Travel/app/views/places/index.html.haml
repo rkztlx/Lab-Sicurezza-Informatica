@@ -1,0 +1,29 @@
+%h1 All Places
+ 
+%table#places
+  %thead
+    %tr
+      %th Place Name
+      %th Street
+      %th Address
+      %th City
+      %th Telephone Number
+      %th Opening Time
+      %th Closing Time
+      %th Description
+      %th Notices
+  %tbody
+    - @places.each do |place|
+      %tr
+        %td= place.name
+        %td= place.street
+        %td= place.address
+        %td= place.city
+        %td= place.telephone_number
+        %td= place.opening_time.strftime("%H:%M")
+        %td= place.closing_time.strftime("%H:%M")
+        %td= place.description
+        %td= place.notices
+        %td= link_to "More about #{place.name}", place_path(place)
+
+= link_to 'Add new place', new_place_path
