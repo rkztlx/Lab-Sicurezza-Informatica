@@ -1,0 +1,29 @@
+%h1 All Users
+ 
+%table#users
+  %thead
+    %tr
+      %th Name
+      %th Surname
+      %th Birth Date
+      %th Nickname
+      %th Email
+      %th Favorite Places
+      %th Bio
+      %th Reviews
+      %th Likes
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.name
+        %td= user.surname
+        %td= user.birth_date
+        %td= user.nickname
+        %td= user.email
+        %td= user.favorite_places
+        %td= user.bio
+        %td= user.num_reviews
+        %td= user.num_likes
+        %td= link_to "More about #{user.name}", user_path(user)
+        
+= link_to 'Add new user', new_user_path
