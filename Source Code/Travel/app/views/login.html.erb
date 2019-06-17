@@ -1,27 +1,31 @@
+<!DOCTYPE html>
 <html>
   <link href="../../assets/stylesheets/login.css" rel="stylesheet">
-  <title>Traveling</title>
-  <h1>Log in</h1>
-  <form>
-      <div class="container">
-          <label for="e-mail"><b>e-mail</b></label>
-          <input type="text" placeholder="e-mail" name="e-mail..." required>
-          <label for="psw"><b>Password</b></label>
-          <input type="password" placeholder="Password..." name="psw" required>
-      
-          <button type="submit">Login</button>
-          <label>
-            <input type="checkbox" checked="checked" name="remember"> Remember me
-          </label>
-        </div>
-      
-        <div class="container" style="background-color:#f1f1f1">
-          <button type="button" class="cancelbtn">Cancel</button>       
-        </div>
-        <div>
-            <a href="#">Sign Up</a>
-            <a href="#">Forgot your password?</a>
-            <a href="#">Sign in with Facebook</a>
-        </div>
-  </form>
+  <title>Travelling</title>
+
+
+  <div class="form" id="form" align="center">
+	  <h1>Log in</h1>
+	  <form class="login-form">
+		  <div class="container">
+			  <div id="table">
+				  <div id="text">
+					  <input type="text" placeholder="Email"><div style="margin-top:5px;"/>
+					  <input type="password" name="password" placeholder="Password"><div style="margin-top:5px;"/>
+					</div>
+				  <div></div>
+				  <div id="rem">
+					<input type="checkbox" name="remember"> Remember me</div><div style="margin-top:5px;"/>
+				  <div></div>
+			<button type="submit" id="login">Log in</button>
+			  <div id="sign" align="justify">
+				<a href="#">Sign Up</a> |
+				<a href="#">Forgot your password?</a> |
+				<a href="#">Sign in with Facebook</a>
+			  </div>
+			</div>
+		  </div>
+	</form>
+  </div>
 </html>
+
