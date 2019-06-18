@@ -5,8 +5,14 @@ class PlacesController < ApplicationController
     end
     
     def show
-        id = params[:id] # retrieve movie ID from URI route
-        @place = Place.find(id) # look up movie by unique ID
+        begin
+            id = params[:id] # retrieve movie ID from URI route
+            @place = Place.find(id) # look up movie by unique ID
+        rescue ActiveRecord::RecordNotFound 
+            redirect_to :controller => "places", :action => "index"
+            flash[:warning] = "There is no place with that index"
+            return
+        end
         # will render app/views/places/show.html.haml by default
     end
 
