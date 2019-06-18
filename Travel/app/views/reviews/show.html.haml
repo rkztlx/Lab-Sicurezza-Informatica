@@ -1,0 +1,18 @@
+
+%h2 Details about #{@Review.place}
+ 
+%ul#details
+  %li
+    Place:
+    = @review.place
+  %li
+    User:
+    = @review.user
+
+%h3 Description:
+ 
+%p#description= @review.description
+
+= link_to 'Edit info', edit_review_path(@review)
+= link_to 'Delete', place_path(@review), :method => :delete, :data => {confirm: 'Are you sure?'}
+= link_to 'Back to review list', review_path

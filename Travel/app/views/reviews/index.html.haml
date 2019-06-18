@@ -1,0 +1,17 @@
+%h1 All Reviews
+ 
+%table#reviews
+  %thead
+    %tr
+      %th Place
+      %th User
+      %th Description
+  %tbody
+    - @reviews.each do |review|
+      %tr
+        %td= review.place
+        %td= review.user
+        %td= review.description
+        %td= link_to "More about #{review.name}", review_path(review)
+
+= link_to 'Add new review', new_review_path
