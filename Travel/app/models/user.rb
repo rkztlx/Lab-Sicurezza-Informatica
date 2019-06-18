@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+    has_many :reviews
+    has_many :places, :through => :reviews
     attr_accessor :remember_token
     before_save { email.downcase! }
     validates :name,  presence: true, length: { maximum: 30 }
@@ -7,7 +9,6 @@ class User < ActiveRecord::Base
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     validates :email,  presence: true, length: { maximum: 50 },  format: { with: VALID_EMAIL_REGEX }, uniqueness: true
     validates :bio,  presence: true, length: { maximum: 300 }
-    has_many :reviews
     has_secure_password
     validates :password, length: { minimum: 6 }
     
