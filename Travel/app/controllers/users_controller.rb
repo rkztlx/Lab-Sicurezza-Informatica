@@ -5,8 +5,14 @@ class UsersController < ApplicationController
     end
     
     def show
-        id = params[:id] #retrieve user ID from URI route
-        @user = User.find(id) # look up id bi unique ID
+        begin
+            id = params[:id] #retrieve user ID from URI route
+            @user = User.find(id) # look up id bi unique ID
+        rescue ActiveRecord::RecordNotFound
+            redirect_to :controller => "users", :action => "index"
+            flash[:warning] = "There is no user with that index"
+            return
+        end
     end
     
     def new
@@ -14,13 +20,13 @@ class UsersController < ApplicationController
     end
 
     def create
-        @user = User.create!(params[:user].permit(:name, :surname, :birth_date, :nickname, :email, :bio))
-        respond_to do |client_wants|
-            client_wants.html {
-                flash[:notice] = "#{@user.name} was successfully created."
-                redirect_to users_path
-            }
-            client_wants.xml { render :xml => @user.to_xml }
+        @user = User.create!(user_params_create)
+        if @user.save
+            log_in @user
+            flash[:success] = "Welcome on board!"
+            redirect_to @user
+        else
+            render 'new'
         end
     end
 
@@ -30,7 +36,7 @@ class UsersController < ApplicationController
 
     def update
         @user = User.find params[:id]
-        @user.update_attributes!(params[:place].permit(:name, :surname, :birth_date, :nickname, :email, :favorite_places, :bio))
+        @user.update_attributes!()
         respond_to do |client_wants|
             client_wants.html {
                 flash[:notice] = "#{@user.name} was successfully updated."
@@ -45,5 +51,13 @@ class UsersController < ApplicationController
         @user.destroy
         flash[:notice] = "User #{@user.name} deleted."
         redirect_to users_path
+    end
+    
+    def user_params_create
+        params[:user].permit(:name, :surname, :birth_date, :nickname, :email, :password, :password_confirmation, :bio)
+    end
+    
+    def user_params_update
+        params[:place].permit(:name, :surname, :birth_date, :nickname, :email, :password, :password_confirmation, :favorite_places, :bio)
     end
 end

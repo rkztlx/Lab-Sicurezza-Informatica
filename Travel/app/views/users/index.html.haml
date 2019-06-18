@@ -3,6 +3,7 @@
 %table#users
   %thead
     %tr
+      %th Index
       %th Name
       %th Surname
       %th Birth Date
@@ -13,8 +14,9 @@
       %th Reviews
       %th Likes
   %tbody
-    - @users.each do |user|
-      %tr
+    - @users.each_with_index do |user,index|
+      %tr.row
+        %td= index
         %td= user.name
         %td= user.surname
         %td= user.birth_date

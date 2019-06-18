@@ -3,12 +3,14 @@
 %table#reviews
   %thead
     %tr
+      %th Index
       %th Place
       %th User
       %th Description
   %tbody
-    - @reviews.each do |review|
-      %tr
+    - @reviews.each_with_index do |review,index|
+      %tr.row
+        %td= index
         %td= review.place
         %td= review.user
         %td= review.description

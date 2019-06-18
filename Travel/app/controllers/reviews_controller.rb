@@ -5,9 +5,15 @@ class ReviewsController < ApplicationController
     end
     
     def show
-        id = params[:id] # retrieve review ID from URI route
-        @review = Review.find(id) # look up review by unique ID
+        begin
+            id = params[:id] # retrieve review ID from URI route
+            @review = Review.find(id) # look up review by unique ID
         # will render app/views/reviews/show.html.haml by default
+        rescue ActiveRecord::RecordNotFound
+            redirect_to :controller => "reviews", :action => "index"
+            flash[:warning] = "There is no review with that index"
+            return
+        end
     end
 
     def new
@@ -15,7 +21,7 @@ class ReviewsController < ApplicationController
     end
 
     def create
-        @review = Review.create!(params[:place].permit(:description))
+        @review = Review.create!(params[:review].permit(:description))
         respond_to do |client_wants|
             client_wants.html {
                 flash[:notice] = "#{@review.description} was successfully added."
