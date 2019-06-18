@@ -1,0 +1,26 @@
+= label :place, :name, 'Name'
+  = text_field :place, :name, required: true
+
+  = label :place, :street, 'Street'
+  = text_field :place, :street, required: true
+ 
+  = label :place, :address, 'Address'
+  = number_field :place, :address, min: 1, required: true
+ 
+  = label :place, :city, 'City'
+  = text_field :place, :city, required: true
+
+  = label :place, :telephone_number, "Telephone Number"
+  = telephone_field :place, :telephone_number
+
+  = label :place, :opening_time, "Opening Time"
+  = time_field :place, :opening_time
+
+  = label :place, :closing_time, "Closing Time"
+  = time_field :place, :closing_time
+
+  = label :place, :description, "Description"
+  = text_area :place, :description, cols: 20, rows: 40
+
+  = label :place, :notices, "Notices"
+  = text_area :place, :notices, cols: 20, rows: 40
