@@ -1,11 +1,13 @@
 !!! 5
 %html
   %head
-    %title Travel!
+    %title= full_title(yield(:title))
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
     = csrf_meta_tags
- 
+    = render 'layouts/shim'
   %body
-    = yield
-
+    = render 'layouts/header'
+    .container
+      = yield
+      = render 'layouts/footer'
