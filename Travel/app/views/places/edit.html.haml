@@ -1,6 +1,6 @@
-%h2 Create New Place
+%h2 Edit Place
  
-= form_tag places_path, :method => :post do
+= form_tag place_path(@place), :method => :put do
  
   = label :place, :name, 'Name'
   = text_field :place, :name, required: true

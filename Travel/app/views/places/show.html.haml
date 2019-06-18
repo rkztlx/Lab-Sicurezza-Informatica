@@ -28,5 +28,7 @@
 %h3 Notices:
 
 %p#notices= @place.notices
- 
+
+= link_to 'Edit info', edit_place_path(@place)
+= link_to 'Delete', place_path(@place), :method => :delete, :data => {confirm: 'Are you sure?'}
 = link_to 'Back to place list', places_path

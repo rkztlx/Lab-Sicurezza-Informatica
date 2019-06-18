@@ -15,9 +15,38 @@ class PlacesController < ApplicationController
     end
 
     def create
-        @place = Place.create!(params[:place])
-        flash[:notice] = "#{@place.name} was successfully created."
+        @place = Place.create!(params[:place].permit(:name, :street, :address, :city, :telephone_number, :opening_time, :closing_time, :description, :notices))
+        respond_to do |client_wants|
+            client_wants.html {
+                flash[:notice] = "#{@place.name} was successfully created."
+                redirect_to places_path
+            }
+            client_wants.xml { render :xml => @place.to_xml }
+        end
+    end
+
+    def edit
+        @place = Place.find params[:id]
+    end
+
+    def update
+        @place = Place.find params[:id]
+        @place.update_attributes!(params[:place].permit(:name, :street, :address, :city, :telephone_number, :opening_time, :closing_time, :description, :notices))
+        respond_to do |client_wants|
+            client_wants.html {
+                flash[:notice] = "#{@place.name} was successfully updated."
+                redirect_to place_path(@place)
+            }
+            client_wants.xml { render :xml => @place.to_xml }
+        end
+    end
+
+    def destroy
+        @place = Place.find(params[:id])
+        @place.destroy
+        flash[:notice] = "Place #{@place.name} deleted."
         redirect_to places_path
     end
+    
 
 end
