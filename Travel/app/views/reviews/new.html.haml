@@ -1,13 +1,13 @@
-%h2 Add New Review
+%h2 Add a comment
  
-= form_tag reviews_path, :method => :post do
- 
-  = label :review, :place, 'Place'
+= form_tag place_reviews_path, :method => :post do
 
-  = label :review, :user, 'User'
+  = label :review, :rating, 'Votes'
+  = select :review, :rating, [1,2,3,4,5]
  
-  = label :review, :description, 'Description'
-  = text_area :review, :description, cols: 30, rows: 10
+  = label :review, :comments, 'Comment'
+  = text_field :review, :comments
 
-  = submit_tag 'Save Changes'
-  = link_to 'Cancel', reviews_path
+  <br/><br/>
+
+  = submit_tag 'Add review'
