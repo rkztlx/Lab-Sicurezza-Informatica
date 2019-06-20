@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+
+    before_action :authenticate_client!
     
     def index
         @users = User.all

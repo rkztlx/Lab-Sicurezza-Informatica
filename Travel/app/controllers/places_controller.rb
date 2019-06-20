@@ -1,4 +1,6 @@
 class PlacesController < ApplicationController
+
+    before_action :authenticate_client!
     
     def index
         @places = Place.all
