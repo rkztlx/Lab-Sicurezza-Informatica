@@ -1,55 +1,92 @@
+<!doctype html>
 <html>
-<link href="../../assets/stylesheets/login.css" rel="stylesheet">
-<title>Travelling</title>
-<h1></h1>
-<div class="container">
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a style="color: black" class="navbar-brand" href="#">Traveling</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+	<head>
+		<meta charset="utf-8">
+		<title>Find Place</title>
+		<link href="../assets/stylesheets/find_place.css" rel="stylesheet">
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+		<link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400" rel="stylesheet">
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="../vendor/animate/animate.css">
+		<link rel="stylesheet" type="text/css" href="../vendor/select2/select2.css">
+		<link rel="stylesheet" type="text/css" href="../vendor/perfect-scrollbar/perfect-scrollbar.css">
+		<link rel="stylesheet" type="text/css" href="../assets/stylesheets/util.css">
+		<link rel="stylesheet" type="text/css" href="../assets/stylesheets/main.css">
+	</head>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto topnav">
-                <li class="nav-item active">
-                    <a class="dropbtn" href='#'>Profile</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="dropbtn" href='#'>MyReviews</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="dropbtn" href='#'>help</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="dropbtn" href='#'>Report</a>
-                </li>
-        </div>
-    </nav>
-</div>
-<form>
-    <div class="container">
-        <label for="place"><b>Find a place</b></label>
-        <input type="text" placeholder="palce" name="place..." required>
-    </div>
+	<body>
+		
+		<div class="banner">
+			<div class="topnav">
+				<div class="text ttitle"><a href="#">Travel</a></div>
+				
+				<div class="text nav ralign">
+					<a href="#" >Profile</a>
+					<a href="#" >My Reviews</a>
+					<a href="#" >Help</a>
+					<a href="#" >Report</a>
+				</div>
+			</div>
+			<h1><strong>Find Place</strong></h1>
+			<br>
+		  <div id="search">
+				<input type="email" id="inputEmail" class="form-control" placeholder="Find a place" required="" autofocus="">
+			</div>
+		</div>
+		<div class="box">
+			<div class="wrap-table100">
+				<div class="table100">
+					<table>
+						<thead>
+							<tr class="table100-head">
+								<th class="column1"></th>
+								<th class="column2">Place</th>
+								<th class="column3">Position</th>
+								<th class="column4">Raiting</th>
+							</tr>
+						</thead>
+						<tbody>
+								<tr>
+									<td class="column1">Visit</td>
+									<td class="column2">PlaceX</td>
+									<td class="column3">PositionX</td>
+									<td class="column4">$999.00</td>
+								</tr>
+								<tr>
+									<td class="column1">Visit</td>
+									<td class="column2">PlaceX</td>
+									<td class="column3">PositionX</td>
+									<td class="column4">$756.00</td>
+								</tr>
+								<tr>
+									<td class="column1">Visit</td>
+									<td class="column2">PlaceX</td>
+									<td class="column3">PositionX</td>
+									<td class="column4">$22.00</td>
+								</tr>								
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		
+	<div class="last">
+		<div  class="combo ralign social">
+		  <a href="#"> <i class="fa fa-facebook " aria-hidden="true"></i> </a>
+		  <a href="#"> <i class="fa fa-twitter " aria-hidden="true"></i> </a>
+		</div>
 
-    <div class="container" style="background-color:#f1f1f1">
-        <button type="button" class="cancelbtn">Cancel</button>
-    </div>
-</form>
-</div>
-<div class="center">
-    <h1>Top Users</h1>
-    <div class="grid-container">
-        <div class="grid-item">
-            <h3>1.User1</h3>
-        </div>
-    </div>
-</div>
-<div>
-    <a href="#">Are you a owner?Register your Place</a>
-    </label>
-    <button type="submit">Register</button>
-    <label>
-</div>
-
+	</div>
+		
+		
+	<script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="../vendor/bootstrap/js/popper.js"></script>
+	<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../vendor/select2/select2.min.js"></script>
+	<script src="../js/main.js"></script>
+	</body>
 </html>
