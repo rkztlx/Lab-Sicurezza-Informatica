@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_20_145519) do
+ActiveRecord::Schema.define(version: 2019_06_21_115158) do
 
   create_table "places", force: :cascade do |t|
     t.string "name"
@@ -41,15 +41,15 @@ ActiveRecord::Schema.define(version: 2019_06_20_145519) do
     t.string "name"
     t.string "provider"
     t.string "uid"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "surname"
     t.date "birth_date"
     t.string "nickname"
-    t.string "favorite_places"
+    t.integer "favorite_place_id"
     t.text "bio"
     t.integer "num_reviews"
     t.integer "num_likes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2019_06_20_145519) do
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["favorite_place_id"], name: "index_users_on_favorite_place_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
