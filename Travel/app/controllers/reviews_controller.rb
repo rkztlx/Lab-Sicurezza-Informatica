@@ -1,58 +1,54 @@
 class ReviewsController < ApplicationController
 
     before_action :authenticate_user!
-    
-    def index
-        @reviews = Place.all
-    end
-    
-    def show
-        begin
-            id = params[:id] # retrieve review ID from URI route
-            @review = Review.find(id) # look up review by unique ID
-        # will render app/views/reviews/show.html.haml by default
-        rescue ActiveRecord::RecordNotFound
-            redirect_to :controller => "reviews", :action => "index"
-            flash[:warning] = "There is no review with that index"
-            return
-        end
-    end
 
     def new
         # default: render ’new’ template
     end
 
     def create
-        @review = Review.create!(params[:review].permit(:description))
+        id_place = params[:place_id]
+		@place = Place.find(id_place)
+		@user = current_user
+		@review = @place.reviews.create!(params[:review].permit(:rating, :comments, :user))
+		##authorize! :create, @review, :message => "BEWARE: You are not authorized to create new reviews."
+		@review.user_id = @user.id
+        @review.save!
         respond_to do |client_wants|
             client_wants.html {
-                flash[:notice] = "#{@review.description} was successfully added."
-                redirect_to reviews_path
+                flash[:notice] = "A review has from #{@user.email} been successfully added to #{@place.title}."
+                redirect_to place_path(@place)
             }
             client_wants.xml { render :xml => @review.to_xml }
         end
     end
 
-    def edit
-        @review = Review.find params[:id]
-    end
+    
+    ##def edit
+        ##@review = Review.find params[:id]
+    ##end
 
-    def update
-        @review = Review.find params[:id]
-        @review.update_attributes!(params[:review].permit(:description))
-        respond_to do |client_wants|
-            client_wants.html {
-                flash[:notice] = "#{@review.description} was successfully added."
-                redirect_to review_path(@review)
-            }
-            client_wants.xml { render :xml => @review.to_xml }
-        end
-    end
+    ##def update
+        ##@review = Review.find params[:id]
+        ##@review.update_attributes!(params[:review].permit(:description))
+        ##respond_to do |client_wants|
+            ##client_wants.html {
+                ##flash[:notice] = "#{@review.description} was successfully added."
+                ##redirect_to review_path(@review)
+            ##}
+            ##client_wants.xml { render :xml => @review.to_xml }
+        ##end
+    ##end
 
     def destroy
-        @review = Review.find(params[:id])
-        @review.destroy
-        flash[:notice] = "Review #{@review.name} deleted."
-        redirect_to review_path
+        id = params[:id]
+		id_place = params[:place_id]
+		@place = Place.find(id_place)
+		##authorize! :destroy, @review, :message => "BEWARE: You are not authorized to delete reviews."
+		@review = Review.find(id)
+		@review.destroy
+		flash[:notice] = "Your review has been deleted."
+		redirect_to place_path(@place)
     end
+
 end

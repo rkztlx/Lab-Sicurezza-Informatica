@@ -1,4 +1,3 @@
-
 %h2 Details about #{@place.name}
  
 %ul#details
@@ -29,6 +28,30 @@
 
 %p#notices= @place.notices
 
-= link_to 'Edit info', edit_place_path(@place)
-= link_to 'Delete', place_path(@place), :method => :delete, :data => {confirm: 'Are you sure?'}
-= link_to 'Back to place list', places_path
+%h3 Reviews:
+- if @place.reviews.empty?
+  %p
+  No reviews for this movie...
+- else
+  - @place.reviews.each do |r|
+    - u = User.find_by_id(r.user_id)
+    - if r.likes.present?
+      - likes=r.likes
+    - else
+      - likes=0
+    - if r.dislikes.present?
+      - dislikes=r.dislikes
+    - else
+      - dislikes = 0
+    <b>#{r.rating}</b> (<i>#{u.email}</i>) #{r.comments} - #{likes} Likes - #{dislikes} Dislikes - #{if u.email==current_user.email; link_to "Delete review", place_review_path(:id => r.id, :place_id => @place.id), :method => :delete, :data => {confirm: 'Are you sure?'}; end}<br />
+
+= link_to 'Add review', new_place_review_path(@place)
+<br/><br/>
+
+#{link_to 'Edit info', edit_place_path(@place)} - #{link_to 'Delete', place_path(@place), :method => :delete, :data => {confirm: 'Are you sure?'}} - #{link_to 'Back to place list', places_path}
+
+
+		
+
+
+
