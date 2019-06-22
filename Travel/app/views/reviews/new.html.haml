@@ -1,7 +1,7 @@
 %h2 Add a comment
  
 = form_tag place_reviews_path, :method => :post do
- 
+
   = label :review, :rating, 'Votes'
   = select :review, :rating, [1,2,3,4,5]
  
@@ -9,14 +9,5 @@
   = text_field :review, :comments
 
   <br/><br/>
+
   = submit_tag 'Add review'
-
-  
-
-
-
-  
-
-  
-
-  

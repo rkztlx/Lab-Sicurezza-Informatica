@@ -1,3 +1,4 @@
+
 %h2 Details about #{@place.name}
  
 %ul#details
@@ -30,28 +31,21 @@
 
 %h3 Reviews:
 - if @place.reviews.empty?
-  %p
-  No reviews for this movie...
+	%p
+		No reviews for this place...
 - else
-  - @place.reviews.each do |r|
-    - u = User.find_by_id(r.user_id)
-    - if r.likes.present?
-      - likes=r.likes
-    - else
-      - likes=0
-    - if r.dislikes.present?
-      - dislikes=r.dislikes
-    - else
-      - dislikes = 0
-    <b>#{r.rating}</b> (<i>#{u.email}</i>) #{r.comments} - #{likes} Likes - #{dislikes} Dislikes - #{if u.email==current_user.email; link_to "Delete review", place_review_path(:id => r.id, :place_id => @place.id), :method => :delete, :data => {confirm: 'Are you sure?'}; end}<br />
-
+	- if can? :read, Review
+		- @place.reviews.each do |r|
+			- u = User.find_by_id(r.user_id)
+			- if r.likes.present?
+				- likes=r.likes
+			- else
+				- likes=0
+			<b>#{r.rating}</b> (<i>#{u.email}</i>) #{r.comments} - #{likes} Likes (#{link_to 'I Like', i_like_review_path(:id => r.id, :place_id => @place.id)}) - #{if u.email==current_user.email; link_to "Delete review", movie_review_path(:id => r.id, :place_id => @place.id), :method => :delete; end}<br />
+	- else
+		<b>You don't have the rights to read reviews.</b>
+		
 = link_to 'Add review', new_place_review_path(@place)
 <br/><br/>
 
 #{link_to 'Edit info', edit_place_path(@place)} - #{link_to 'Delete', place_path(@place), :method => :delete, :data => {confirm: 'Are you sure?'}} - #{link_to 'Back to place list', places_path}
-
-
-		
-
-
-
