@@ -9,14 +9,12 @@ class ReviewsController < ApplicationController
     def create
         id_place = params[:place_id]
 		@place = Place.find(id_place)
-		@user = current_user
-		@review = @place.reviews.create!(params[:review].permit(:rating, :comments, :user))
+        @user = current_user
+        @user.reviews << @place.reviews.build(params[:review].permit(:rating, :comments))
 		##authorize! :create, @review, :message => "BEWARE: You are not authorized to create new reviews."
-		@review.user_id = @user.id
-        @review.save!
         respond_to do |client_wants|
             client_wants.html {
-                flash[:notice] = "A review has from #{@user.email} been successfully added to #{@place.title}."
+                flash[:notice] = "A review has from #{@user.email} been successfully added to #{@place.name}."
                 redirect_to place_path(@place)
             }
             client_wants.xml { render :xml => @review.to_xml }
