@@ -49,4 +49,30 @@ class ReviewsController < ApplicationController
 		redirect_to place_path(@place)
     end
 
+    ##def like
+		##id_place = params[:place_id]
+		##id_review = params[:id]
+		##review = Review.find(id_review)
+		##if review.likes.present?
+			##l = review.likes + 1
+		##else
+			##l = 1
+		##end
+		##review.update(likes: l)
+		##redirect_to place_path(id_place)
+    ##end
+    
+    def dislike
+		id_place = params[:place_id]
+		id_review = params[:id]
+		review = Review.find(id_review)
+		if review.dislikes.present?
+			l = review.dislikes + 1
+		else
+			l = 1
+		end
+		review.update(dislikes: l)
+		redirect_to place_path(id_place)
+	end
+
 end

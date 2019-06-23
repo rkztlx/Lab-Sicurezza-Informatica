@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_21_115158) do
+ActiveRecord::Schema.define(version: 2019_06_23_145116) do
+
+  create_table "dislikes", force: :cascade do |t|
+    t.integer "review_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["review_id"], name: "index_dislikes_on_review_id"
+    t.index ["user_id"], name: "index_dislikes_on_user_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "review_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["review_id"], name: "index_likes_on_review_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
 
   create_table "places", force: :cascade do |t|
     t.string "name"

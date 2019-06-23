@@ -3,6 +3,8 @@ class User < ApplicationRecord
   has_many :reviews
   has_many :places, :through => :reviews
   belongs_to :place, optional: true
+  has_many :likes, dependent: :destroy
+  has_many :dislikes, dependent: :destroy
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, and :omniauthable
