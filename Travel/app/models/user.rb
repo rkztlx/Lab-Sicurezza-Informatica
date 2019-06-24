@@ -5,6 +5,8 @@ class User < ApplicationRecord
   belongs_to :place, optional: true
   has_many :likes, dependent: :destroy
   has_many :dislikes, dependent: :destroy
+
+  acts_as_user :roles => [ :admin, :moderator, :owner ]
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, and :omniauthable

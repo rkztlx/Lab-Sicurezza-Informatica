@@ -2,14 +2,10 @@
  
 = form_tag place_reviews_path, :method => :post do
  
-  = label :review, :rating, 'Votes'
-  = select :review, :rating, [1,2,3,4,5]
- 
-  = label :review, :comments, 'Comment'
-  = text_field :review, :comments
+  = render :partial => 'review_form'
+  = submit_tag 'Save Changes'
 
-  <br/><br/>
-  = submit_tag 'Add review'
+= link_to 'Cancel', place_path(:id => params[:place_id])
 
   
 

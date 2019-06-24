@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_23_145116) do
+ActiveRecord::Schema.define(version: 2019_06_24_134608) do
 
   create_table "dislikes", force: :cascade do |t|
     t.integer "review_id"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 2019_06_23_145116) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.integer "roles_mask"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["favorite_place_id"], name: "index_users_on_favorite_place_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

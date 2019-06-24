@@ -33,13 +33,16 @@
   %p
   No reviews for this movie...
 - else
-  - @place.reviews.each do |r|
-    - u = User.find_by_id(r.user_id)
-    - likes = r.likes.count
-    - dislikes = r.dislikes.count
-    - pre_like = r.likes.find { |like| like.user_id == current_user.id}
-    - pre_dislike = r.dislikes.find { |dislike| dislike.user_id == current_user.id}
-    <b>#{r.rating}</b> (<i>#{u.email}</i>) #{r.comments} - #{likes} #{(r.likes.count) == 1 ? 'Like' : 'Likes'} #{if pre_like; link_to "Unlike", place_review_like_path(@place, r, pre_like), :method => :delete; else; link_to 'Like', place_review_likes_path(@place, r), :method => :post; end;} - #{dislikes} #{(r.dislikes.count) == 1 ? 'Dislike' : 'Dislikes'} #{if pre_dislike; link_to "Undislike", place_review_dislike_path(@place, r, pre_dislike), :method => :delete; else; link_to 'Dislike', place_review_dislikes_path(@place, r), :method => :post; end;} - #{if u.email==current_user.email; link_to "Delete review", place_review_path(:id => r.id, :place_id => @place.id), :method => :delete, :data => {confirm: 'Are you sure?'}; end}<br />
+  - if can? :read, Review
+    - @place.reviews.each do |r|
+      - u = User.find_by_id(r.user_id)
+      - likes = r.likes.count
+      - dislikes = r.dislikes.count
+      - pre_like = r.likes.find { |like| like.user_id == current_user.id}
+      - pre_dislike = r.dislikes.find { |dislike| dislike.user_id == current_user.id}
+      <b>#{r.rating}</b> (<i>#{u.email}</i>) #{r.comments} - #{likes} #{(r.likes.count) == 1 ? 'Like' : 'Likes'} #{if pre_like; link_to "Unlike", place_review_like_path(@place, r, pre_like), :method => :delete; else; link_to 'Like', place_review_likes_path(@place, r), :method => :post; end;} #{dislikes} #{(r.dislikes.count) == 1 ? 'Dislike' : 'Dislikes'} #{if pre_dislike; link_to "Undislike", place_review_dislike_path(@place, r, pre_dislike), :method => :delete; else; link_to 'Dislike', place_review_dislikes_path(@place, r), :method => :post; end;} #{if u.email==current_user.email; link_to "Delete review", place_review_path(:id => r.id, :place_id => @place.id), :method => :delete, :data => {confirm: 'Are you sure?'}; end} #{if u.email==current_user.email; link_to "Edit review", edit_place_review_path(:id => r.id, :place_id => @place.id); end}<br />
+  - else
+    <b>You don't have the rights to read reviews.</b>
 
 = link_to 'Add review', new_place_review_path(@place)
 <br/><br/>

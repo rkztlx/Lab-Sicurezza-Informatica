@@ -24,6 +24,7 @@ class PlacesController < ApplicationController
 
     def create
         @place = Place.create!(params[:place].permit(:name, :street, :address, :city, :telephone_number, :opening_time, :closing_time, :description, :notices))
+        authorize! :create, @place, :message => "BEWARE: You are not authorized to create a new place."
         respond_to do |client_wants|
             client_wants.html {
                 flash[:notice] = "#{@place.name} was successfully created."
@@ -35,10 +36,12 @@ class PlacesController < ApplicationController
 
     def edit
         @place = Place.find params[:id]
+        authorize! :update, @place, :message => "BEWARE: You are not authorized to edit a place."
     end
 
     def update
         @place = Place.find params[:id]
+        authorize! :update, @place, :message => "BEWARE: You are not authorized to update a place."
         @place.update_attributes!(params[:place].permit(:name, :street, :address, :city, :telephone_number, :opening_time, :closing_time, :description, :notices))
         respond_to do |client_wants|
             client_wants.html {
@@ -51,6 +54,7 @@ class PlacesController < ApplicationController
 
     def destroy
         @place = Place.find(params[:id])
+        authorize! :destroy, @place, :message => "BEWARE: You are not authorized to delete a place."
         @place.destroy
         flash[:notice] = "Place #{@place.name} deleted."
         redirect_to places_path
