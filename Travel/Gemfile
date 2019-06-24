@@ -66,3 +66,5 @@ gem 'haml'
 
 gem 'devise'
 gem 'omniauth-facebook'
+
+gem 'cancancan'
