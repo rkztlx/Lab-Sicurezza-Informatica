@@ -5,9 +5,9 @@
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     %meta{:content => "ie=edge", "http-equiv" => "X-UA-Compatible"}/
     %link{:crossorigin => "anonymous", :href => "https://use.fontawesome.com/releases/v5.3.1/css/all.css", :integrity => "sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU", :rel => "stylesheet"}/
-    %title Bootstrap 4 Login/Register Form
     %script{:src => "//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"}
-    %link{:href => "../../../assets/stylesheet/login.css", :rel => "stylesheet"}/
+    %link{:href => "/assets/login.css", :rel => "stylesheet"}/
+    %link{:href => "/assets/boo46A8.css", :rel => "stylesheet"}/
     %script{:src => "//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"}
     %link
   %body
@@ -15,10 +15,9 @@
       %form.form-signin
         %h1.h3.mb-3.font-weight-normal{:style => "text-align: center"} Log in
         .social-login
-          %button.btn.facebook-btn.social-btn.btn-block{:type => "button"}
-            %span
-              %em.fab.fa-facebook-f
-              = link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path
+          = link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: "btn facebook-btn social-btn btn-block", style: "width: 26.5em"
+
+        
         %p{:style => "text-align:center"} OR
         %input#inputEmail.form-control{:autofocus => "", :placeholder => "Email address", :required => "", :type => "email"}/
         %input#inputPassword.form-control{:placeholder => "Password", :required => "", :type => "password"}/
@@ -37,29 +36,7 @@
         %button#btn-signup.btn.btn-primary.btn-block{:type => "button"}
           %i.fas.fa-user-plus
           Sign up New Account
-      %form.form-reset{:action => "/reset/password/"}
-        %input#resetEmail.form-control{:autofocus => "", :placeholder => "Email address", :required => "", :type => "email"}/
-        %button.btn.btn-primary.btn-block{:type => "submit"} Reset Password
-        %a#cancel_reset{:href => "#"}
-          %i.fas.fa-angle-left
-          Back
-      %form.form-signup{:action => "/signup/"}
-        .social-login
-          %button.btn.facebook-btn.social-btn{:type => "button"}
-            %span
-              %i.fab.fa-facebook-f
-              Sign up with Facebook
-        %p{:style => "text-align:center"} OR
-        %input#user-name.form-control{:autofocus => "", :placeholder => "Full name", :required => "", :type => "text"}/
-        %input#user-email.form-control{:autofocus => "", :placeholder => "Email address", :required => "", :type => "email"}/
-        %input#user-pass.form-control{:autofocus => "", :placeholder => "Password", :required => "", :type => "password"}/
-        %input#user-repeatpass.form-control{:autofocus => "", :placeholder => "Repeat Password", :required => "", :type => "password"}/
-        %button.btn.btn-primary.btn-block{:type => "submit"}
-          %i.fas.fa-user-plus
-          Sign Up
-        %a#cancel_signup{:href => "#"}
-          %i.fas.fa-angle-left
-          Back
       %br/
+    = render "users/shared/links"
     %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"}
     %script{:crossorigin => "anonymous", :integrity => "sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl", :src => "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"}
