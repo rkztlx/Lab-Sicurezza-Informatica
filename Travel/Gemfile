@@ -72,4 +72,5 @@ gem 'haml'
 gem 'devise'
 gem 'omniauth-facebook'
 
-gem 'canard'
+gem 'cancancan'
+

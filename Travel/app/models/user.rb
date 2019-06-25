@@ -1,12 +1,13 @@
 class User < ApplicationRecord
 
+  before_create :set_default_role
   has_many :reviews
   has_many :places, :through => :reviews
   belongs_to :place, optional: true
   has_many :likes, dependent: :destroy
   has_many :dislikes, dependent: :destroy
 
-  acts_as_user :roles => [ :admin, :moderator, :owner ]
+  ROLES = [:admin, :moderator, :user, :owner, :banned]
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, and :omniauthable
@@ -28,6 +29,27 @@ class User < ApplicationRecord
         user.email = data["email"] if user.email.blank?
       end
     end
+  end
+
+  def roles= (roles)
+    self.roles_mask = (roles & ROLES).map { |r| 2** ROLES.index(r) }.sum
+  end
+  
+  def roles
+    ROLES.reject { |r| ((roles_mask || 0) & 2** ROLES.index(r)).zero? }
+  end
+  
+  def role_strings
+    roles.map(& :to_s )
+  end
+  
+  def is?(role)
+    roles.include?(role)
+  end
+  
+  private
+  def set_default_role
+    self.roles = [:user]
   end
 
 end
