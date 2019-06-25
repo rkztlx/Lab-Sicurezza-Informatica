@@ -10,13 +10,22 @@
     = @user.surname
   %li
     Birth Date:
-    = @user.birth_date
+    = @user.birth_date.strftime("%F")
   %li
     Nickname:
     = @user.nickname
   %li
     Email:
     = @user.email
+  %li
+    Favorite Places:
+    = @user.favorite_places
+  %li
+    Reviews:
+    = @user.num_reviews
+  %li
+    Likes:
+    = @user.num_likes
     
 %h3 Bio:
  

@@ -19,7 +19,6 @@ class User < ApplicationRecord
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
-      parse_name(user, auth.info.name)
     end
     
   end
@@ -49,15 +48,8 @@ class User < ApplicationRecord
   end
   
   private
-  
   def set_default_role
     self.roles = [:user]
-  end
-
-  def self.parse_name(user, name)
-    name_arr = name.split(" ")
-    user.surname = name_arr.pop
-    user.name = name_arr.join(" ")
   end
 
 end
