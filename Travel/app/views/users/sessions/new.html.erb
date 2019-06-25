@@ -5,36 +5,44 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="../../assets/stylesheets/bootstrap.min.css" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-  <link rel="stylesheet" href="../../assets/stylesheets/login.css">
+  <link rel="stylesheet" href="../../assets/login.css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
-<div id="logreg-forms">
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name), :class => "form-signin") do |f| %>
-    <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Log in</h1>
-    <div class="social-login">
-      <button class="btn facebook-btn social-btn btn-block" type="button"><span><em class="fab fa-facebook-f"></em> Log in with Facebook</span></button>
-    </div>
-    <p style="text-align:center"> OR  </p>
-    <div class="field">
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control", placeholder: "Email" %>
-      <%= f.password_field :password, autocomplete: "current-password", :class => "form-control", placeholder: "Password" %>
-      <%= f.submit "Log in", :class=>"btn btn-success btn-block action" %>
-    <table>
-      <tr>
-      <td id="td0">
-        <a href="#" id="forgot_pswd">Forgot password?</a>   <%# DA CAMBIARE %>
-      </td>
-      <td id="td1">
-        <%= f.check_box :remember_me%>  Remember Me
-      </td>
-      </tr>
-    </table>
-    <hr>
-    <%= f.submit "Sign Up", :class=>"btn btn-primary btn-block", :id=>"btn-signup" %>
-  <% end %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<div class="card text-center shadow p-3 mb-5 bg-white rounded">
+  <div class="card-header bg-dark text-white">
+    <h2>Travel Login</h2>
+  </div>
+  <div>
+
+      <div class="field">
+        <h5><%= f.label :email %></h5>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", :class =>"form-control" %>
+      </div>
+      <br>
+
+      <div class="field">
+        <h5><%= f.label :password %></h5>
+        <%= f.password_field :password, autocomplete: "current-password", :class =>"form-control" %>
+      </div>
+      <br>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <%= f.check_box :remember_me, :class=> "form-check-input" %>
+          <%= f.label :remember_me , :class =>"form-check-label" %>
+        </div>
+      <% end %>
+      <br>
+
+      <div class="actions">
+        <%= f.submit "Log in" , :class=>"btn btn-success btn-block"%>
+      </div>
+      <% end %>
+
+      <%= render "users/shared/links" %>
+
+  </div>
 </div>
-
-
-<%= render "users/shared/links" %>
