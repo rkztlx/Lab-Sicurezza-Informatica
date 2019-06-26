@@ -14,7 +14,11 @@
   </li>
   <li>
     Telephone Number:
-    <%= @place.telephone_number %>
+    <% if @place.telephone_number != '' %>
+      <%= @place.telephone_number %>
+    <% else %>
+      No telephone number for this place
+    <% end %>
   </li>
   <li>
     Opening Time:
