@@ -1,15 +1,14 @@
-
 <head>
-  <link rel="stylesheet" href="../../../assets/static_pages/login.css">
+    <link rel="stylesheet" href="../../../assets/static_pages/style.css">
+	<link rel="stylesheet" href="../../../assets/static_pages/signup.css">
 </head>
-
+<body>
 <div id="logreg-forms">
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), :class => "form-signin") do |f| %>
     <h2 class="card-header bg-dark text-white" style="text-align: center">Log In</h2><br/>
     <div>
-
         <div class="field">
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control", placeholder: "Email" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control", placeholder: "Email" %>
           <br/>
           <%= f.password_field :password, autocomplete: "current-password", :class => "form-control", placeholder: "Password" %>
           <br/>
@@ -35,3 +34,5 @@
 
     </div>
 </div>
+
+</body>

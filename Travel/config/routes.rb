@@ -14,6 +14,6 @@ Rails.application.routes.draw do
   
   get 'static_pages/home'
 
-  root :to  => redirect('/places')
+  root :to  => redirect('/static_pages/home')
 
 end
