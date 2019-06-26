@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   end
   
   resources :users
+  get '/user/profile', to: 'users#profile'
+  
+
 
   root :to  => redirect('/places')
 
