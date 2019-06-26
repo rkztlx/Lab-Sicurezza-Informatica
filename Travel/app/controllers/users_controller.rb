@@ -34,10 +34,20 @@ class UsersController < ApplicationController
 
     def edit
         @user = User.find params[:id]
+        authorize! :update, @user, :message => "BEWARE: You are not authorized to edit a place."
+        if current_user != @user
+            flash[:warning] = "You are not authorized to edit this user"
+            redirect_to user_path(@user)
+        end
     end
 
     def update
         @user = User.find params[:id]
+        authorize! :update, @user, :message => "BEWARE: You are not authorized to update this user."
+        if current_user != @user
+            flash[:warning] = "You are not authorized to update this user"
+            redirect_to user_path(@user)
+        end
         @user.update_attributes!()
         respond_to do |client_wants|
             client_wants.html {

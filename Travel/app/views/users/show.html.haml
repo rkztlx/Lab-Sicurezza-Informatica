@@ -38,6 +38,6 @@
  
 
     
-= link_to 'Edit info', edit_user_registration_path
-= link_to 'Delete', user_path(@user), :method => :delete, :data => {confirm: 'Are you sure?'}
+#{if current_user == @user; link_to 'Edit info', edit_user_registration_path; end}
+#{if(current_user == @user || current_user.is?(:admin)); link_to 'Delete', user_path(@user), :method => :delete, :data => {confirm: 'Are you sure?'}; end }
 = link_to 'Back to Place list', places_path
