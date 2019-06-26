@@ -13,7 +13,7 @@ class DislikesController < ApplicationController
             @user.num_likes -= 1
         end
         @user.save!
-        redirect_to place_path(Place.find(params[:place_id]))
+        redirect_to request.referer
     end
 
     def destroy
@@ -25,7 +25,7 @@ class DislikesController < ApplicationController
             @user.num_dislikes -= 1
             @user.save!
         end
-        redirect_to place_path(Place.find(params[:place_id]))
+        redirect_to request.referer
     end
     
     private

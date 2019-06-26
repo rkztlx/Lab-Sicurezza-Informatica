@@ -4,4 +4,4 @@
     = render :partial => 'review_form'
     = submit_tag 'Update Review'
 
-= link_to 'Cancel', place_path(:id => params[:place_id])
+= link_to 'Cancel', request.referer

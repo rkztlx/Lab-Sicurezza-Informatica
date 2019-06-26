@@ -1,0 +1,30 @@
+<h2>Reviews of <%= @user.name %> </h2>
+<% if can? :read, Review %>
+    <% @reviews.each do |r| %>
+        <% likes = r.likes.count %>
+        <% dislikes = r.dislikes.count %>
+        <% pre_like = r.likes.find { |like| like.user_id == @user.id} %>
+        <% pre_dislike = r.dislikes.find { |dislike| dislike.user_id == @user.id} %>
+        <b> <%= r.rating %> </b> (<i><%= @user.email %></i>) <%= r.comments %> - <%= likes %> <%= (r.likes.count) == 1 ? 'Like' : 'Likes' %>
+        <% if pre_like %>
+            <%= link_to "Unlike", place_review_like_path(r.place, r, pre_like), :method => :delete %>
+        <% else %>
+            <%= link_to 'Like', place_review_likes_path(r.place, r), :method => :post %>
+        <% end %> <%= dislikes %> <%= (r.dislikes.count) == 1 ? 'Dislike' : 'Dislikes' %>
+        <% if pre_dislike %>
+            <%= link_to "Undislike", place_review_dislike_path(r.place, r, pre_dislike), :method => :delete %>
+        <% else %>
+            <%= link_to 'Dislike', place_review_dislikes_path(r.place, r), :method => :post %>
+        <% end %>
+        <%= link_to "Delete review", place_review_path(:id => r.id, :place_id => r.place.id), :method => :delete, :data => {confirm: 'Are you sure?'} %>
+        <%= link_to "Edit review", edit_place_review_path(:id => r.id, :place_id => r.place.id) %> 
+        <%= "To the place: " %> <%= link_to "#{r.place.name}", place_path(r.place) %> <br />
+    <% end %>
+    <br />
+<% else %>
+    <b>You don't have the rights to read reviews.</b>
+<% end %>
+
+<br/><br/> 
+
+<%= link_to 'Back to place list', places_path %>

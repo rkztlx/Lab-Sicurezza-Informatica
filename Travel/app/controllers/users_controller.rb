@@ -77,6 +77,13 @@ class UsersController < ApplicationController
         flash[:notice] = "Place #{@place.name} has been set as your favorite"
         redirect_to place_path(@place)
     end
+
+    def reviews
+        @user = User.find(params[:id])
+        @reviews = @user.reviews
+        # default: render ’reviews’ template
+    end
+        
     
     def user_params_create
         params[:user].permit(:name, :surname, :birth_date, :nickname, :email, :password, :password_confirmation, :bio)

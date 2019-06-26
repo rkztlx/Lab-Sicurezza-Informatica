@@ -27,6 +27,7 @@ class ReviewsController < ApplicationController
     def edit
         @review = Review.find params[:id]
         authorize! :update, @review, :message => "BEWARE: You are not authorized to edit a review."
+        flash[:previous_page] = request.referer
     end
 
     def update
@@ -36,7 +37,7 @@ class ReviewsController < ApplicationController
         respond_to do |client_wants|
             client_wants.html {
                 flash[:notice] = "Review was successfully added."
-                redirect_to place_path(@review.place)
+                redirect_to flash[:previous_page]
             }
             client_wants.xml { render :xml => @review.to_xml }
         end
@@ -50,7 +51,7 @@ class ReviewsController < ApplicationController
 		authorize! :destroy, @review, :message => "BEWARE: You are not authorized to delete a review."
 		@review.destroy
 		flash[:notice] = "Your review has been deleted."
-		redirect_to place_path(@place)
+		redirect_to request.referer
     end
 
 end
