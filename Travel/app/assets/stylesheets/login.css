@@ -1,8 +1,8 @@
 /* log in FORM */
 
 body{
-	background-image: url("../images/10000011623-2.jpg") !important;
-	background-size:cover; 
+	background-image: url(10000011623-2.jpg) !important;
+	background-size: cover; 
 	background-repeat: no-repeat;
 }
 
@@ -111,8 +111,4 @@ body{
         content:'Facebook';
     }
 
-}
-
-#remember{
-    
 }
