@@ -22,8 +22,8 @@
         %td= place.address
         %td= place.city
         %td= place.telephone_number
-        %td= place.opening_time.strftime("%H:%M")
-        %td= place.closing_time.strftime("%H:%M")
+        %td= if(!place.opening_time.nil?); place.opening_time.strftime("%H:%M"); else  "-"; end;
+        %td= if(!place.closing_time.nil?); place.closing_time.strftime("%H:%M"); else  "-"; end;
         %td= place.description
         %td= place.notices
         %td= link_to "More about #{place.name}", place_path(place)
