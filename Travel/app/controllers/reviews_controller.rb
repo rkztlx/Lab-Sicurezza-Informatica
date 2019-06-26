@@ -10,10 +10,13 @@ class ReviewsController < ApplicationController
         id_place = params[:place_id]
 		@place = Place.find(id_place)
         @user = current_user
+        pre_avarage = @place.avarage
         @review = @place.reviews.build(params[:review].permit(:rating, :comments))
         authorize! :create, @review, :message => "BEWARE: You are not authorized to create a new review."
         @user.reviews << @review
         @review.save!
+        @place.avarage = ((pre_avarage * (@place.reviews.count - 1)) + @review.rating) / @place.reviews.count
+        @place.save!
         respond_to do |client_wants|
             client_wants.html {
                 flash[:notice] = "A review has from #{@user.email} been successfully added to #{@place.name}."

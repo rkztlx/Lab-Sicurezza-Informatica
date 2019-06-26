@@ -42,6 +42,10 @@
           No closing time for this place
         <% end %>
       </li>
+      <li>
+        Avarage Rating:
+        <%= @place.avarage %>
+      </li>
     </ul>
     <h3>Description:</h3>
     <p id="description">
@@ -63,7 +67,7 @@
     <%= link_to 'Back to place list', places_path %>
     <%= link_to 'Set as a favorite', set_favorite_path(:id => current_user.id, :place_id => @place.id) %>
     <% if ( current_user.is?(:moderator) || current_user.is?(:admin)) %>
-      <% link_to 'Delete', place_path(@place), :method => :delete, :data => {confirm: 'Are you sure?'}; %>
+      <%= link_to 'Delete', place_path(@place), :method => :delete, :data => {confirm: 'Are you sure?'}; %>
     <% end %>
 </div>
 

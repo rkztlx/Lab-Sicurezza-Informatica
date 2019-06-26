@@ -69,7 +69,7 @@ class PlacesController < ApplicationController
     def destroy
         @place = Place.find(params[:id])
         authorize! :destroy, @place, :message => "BEWARE: You are not authorized to delete a place."
-        if current_user != @place.user
+        if current_user != @place.user && !current_user.is?(:moderator) && !current_user.is?(:admin)
             flash[:warning] = "You are not authorized to delete this place"
             redirect_to place_path(@place)
         end

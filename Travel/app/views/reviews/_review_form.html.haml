@@ -4,10 +4,10 @@
       .field
 
         = label :review, :rating, 'Votes'
-        = select :review, :rating, [1,2,3,4,5]
+        = select :review, :rating, [1,2,3,4,5], required: true
         %br/
         %br/
         = label :review, :comments, 'Comment'
-        = text_field :review, :comments
+        = text_field :review, :comments, required: true
  
   
