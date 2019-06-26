@@ -60,7 +60,8 @@
   No reviews for this place...
 <% else %>
   <% if can? :read, Review %>
-    <% @place.reviews.each do |r| %>
+    <% reviews = @place.reviews.sort_by { |r| r.dislikes.count - r.likes.count } %>
+    <%  reviews.each do |r| %>
       <% u = User.find_by_id(r.user_id) %>
       <% likes = r.likes.count %>
       <% dislikes = r.dislikes.count %>
