@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   get 'places/:place_id/set_favorite/:id', to: 'users#favorite', as: 'set_favorite'
   
-
+  get 'static_pages/home'
 
   root :to  => redirect('/places')
 

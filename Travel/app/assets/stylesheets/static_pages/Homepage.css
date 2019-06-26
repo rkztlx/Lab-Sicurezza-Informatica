@@ -3,7 +3,7 @@
 
 body { 
 	min-width:200px; margin: 0 auto; font-family: 'Raleway', sans-serif;
-	background: url("../images/dark-universe-30104-30821-hd-wallpapers.jpg");
+	background: url(dark-universe-30104-30821-hd-wallpapers.jpg);
 	background-size: cover; 
 	background-attachment:fixed; 
 	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
