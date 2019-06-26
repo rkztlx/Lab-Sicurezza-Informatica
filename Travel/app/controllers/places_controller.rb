@@ -23,8 +23,10 @@ class PlacesController < ApplicationController
     end
 
     def create
-        @place = Place.create!(params[:place].permit(:name, :street, :address, :city, :telephone_number, :opening_time, :closing_time, :description, :notices))
+        @owner = current_user
+        @place = @owner.property.build(params[:place].permit(:name, :street, :address, :city, :telephone_number, :opening_time, :closing_time, :description, :notices))
         authorize! :create, @place, :message => "BEWARE: You are not authorized to create a new place."
+        @place.save!
         respond_to do |client_wants|
             client_wants.html {
                 flash[:notice] = "#{@place.name} was successfully created."

@@ -28,6 +28,10 @@
 
 %p#notices= @place.notices
 
+%h3 Owner Profile:
+
+%p#owner= link_to 'Owner Profile', user_path(current_user)
+
 %h3 Reviews:
 - if @place.reviews.empty?
   %p

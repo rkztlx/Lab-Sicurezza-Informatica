@@ -3,9 +3,10 @@ class User < ApplicationRecord
   before_create :set_default_role
   has_many :reviews
   has_many :places, :through => :reviews
-  belongs_to :place, optional: true
+  belongs_to :favorite_place  , optional: true, class_name: 'Place'
   has_many :likes, dependent: :destroy
   has_many :dislikes, dependent: :destroy
+  has_many :property, class_name: 'Place'
 
   ROLES = [:admin, :moderator, :user, :owner, :banned]
   

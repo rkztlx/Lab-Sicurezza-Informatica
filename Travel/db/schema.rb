@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_24_134608) do
+ActiveRecord::Schema.define(version: 2019_06_26_082524) do
 
   create_table "dislikes", force: :cascade do |t|
     t.integer "review_id"
@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 2019_06_24_134608) do
     t.text "notices"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_places_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
