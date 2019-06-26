@@ -1,0 +1,39 @@
+<div>
+    <div class="col-md-5 box">
+        <div>
+            <div class="field">
+                <div><label><h2>Name<h2></label></div>
+                <%= text_field :place, :name, required: true, autocomplete: "name", :class => "form-control", placeholder: "Name" %>
+                <br/>
+                <div><label><h2>Street<h2></label></div>
+                <%= text_field :place, :street, required: true, autocomplete: "street", :class => "form-control", placeholder: "Street" %>
+                <br/>
+                <div><label><h2>Adress<h2></label></div>
+                <%= number_field :place, :address, required: true, autocomplete: "address",min: 1, :class => "form-control", placeholder: "Address" %>
+                <br/>
+                <div><label><h2>City<h2></label></div>
+                <%= text_field :place, :city, required: true, autocomplete: "city", :class => "form-control", placeholder: "City" %>
+                <br/>
+                <div><label><h2>Telephone<h2></label></div>
+                <%= telephone_field :place, :Telephone, required: true, autocomplete: "adress",min: 1, max: 9999999999, :class => "form-control", placeholder: "Telephone" %>
+                <br/>
+            </div>
+                <label><h2>Opening Time<h2></label>
+                <div><%= time_field :place, :opening_time, required: true, autocomplete: "opening_time", :class => "form-control", placeholder: "Opening Time"%></div>
+                <br/>
+                <label><h2>Closing Time<h2></label>
+                <%= time_field :place, :closing_time, required: true, autocomplete: "closing_time", :class => "form-control", placeholder: "Closing Time" %>
+                <br/>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+    
+    <div class="col-md-4">
+        <div class="field">
+            <br/><br/><br/><br/>
+            <div><label><h2>Description<h2></label></div>
+            <%= text_area :place, :description, required: true, autocomplete: "description", :class => "form-control", placeholder: "Description",cols: 20, rows: 7 %>
+            <br/>
+            <div><label><h2>Notices<h2></label></div>
+            <%= text_area :place, :notices, required: true, autocomplete: "notices", :class => "form-control", placeholder: "Notices",cols: 20, rows: 7 %>
+            <br/>
