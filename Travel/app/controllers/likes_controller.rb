@@ -5,10 +5,14 @@ class LikesController < ApplicationController
     
     def create
         @review.likes.create(user_id: current_user.id)
+        @user = @review.user
+        @user.num_likes += 1
         @dislike = @review.dislikes.where(["user_id = ?", current_user.id]).first
         if !@dislike.nil?
             @review.dislikes.destroy(@dislike.id)
+            @user.num_dislikes -= 1
         end
+        @user.save!
         redirect_to place_path(Place.find(params[:place_id]))
     end
 
@@ -17,6 +21,9 @@ class LikesController < ApplicationController
             flash[:notice] = "Cannot unlike"
         else
             @like.destroy
+            @user = @review.user
+            @user.num_likes -= 1
+            @user.save!
         end
         redirect_to place_path(Place.find(params[:place_id]))
     end

@@ -17,6 +17,20 @@
   %li
     Email:
     = @user.email
+  %li
+    Favorite Place:
+    - if(!@user.favorite_place.nil?)
+      = link_to "#{@user.favorite_place.name}", place_path(@user.favorite_place)
+    - else 
+      %p 
+      This user does not have a favorite place
+  %li
+    Satisfaction Index:
+    - if @user.num_dislikes == 0
+      %p 
+      This user has no dislikes
+    - else
+      = @user.num_likes / @user.num_dislikes
     
 %h3 Bio:
  

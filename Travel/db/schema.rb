@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_26_113524) do
+ActiveRecord::Schema.define(version: 2019_06_26_143945) do
 
   create_table "dislikes", force: :cascade do |t|
     t.integer "review_id"

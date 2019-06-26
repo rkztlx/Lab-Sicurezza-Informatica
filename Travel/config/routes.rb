@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   end
   
   resources :users
-  get '/user/profile', to: 'users#profile'
+
+  get 'places/:place_id/set_favorite/:id', to: 'users#favorite', as: 'set_favorite'
   
 
 

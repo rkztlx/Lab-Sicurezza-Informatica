@@ -58,6 +58,15 @@ class UsersController < ApplicationController
         end
         redirect_to places_path
     end
+
+    def favorite
+        @user = User.find(params[:id])
+        @place = Place.find(params[:place_id])
+        @user.favorite_place = @place
+        @user.save!
+        flash[:notice] = "Place #{@place.name} has been set as your favorite"
+        redirect_to place_path(@place)
+    end
     
     def user_params_create
         params[:user].permit(:name, :surname, :birth_date, :nickname, :email, :password, :password_confirmation, :bio)

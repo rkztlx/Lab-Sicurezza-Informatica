@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 
   before_create :set_default_role
+  after_create :set_num_likes_dislikes
   has_many :reviews
   has_many :places, :through => :reviews
   belongs_to :favorite_place  , optional: true, class_name: 'Place'
@@ -59,6 +60,11 @@ class User < ApplicationRecord
     name_arr = name.split(" ")
     user.surname = name_arr.pop
     user.name = name_arr.join(" ")
+  end
+
+  def set_num_likes_dislikes
+    self.num_likes = 0
+    self.num_dislikes = 0
   end
   
   
