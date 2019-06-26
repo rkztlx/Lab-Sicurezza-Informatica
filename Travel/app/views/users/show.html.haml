@@ -1,6 +1,7 @@
 %h2 Details about #{@user.name}
  
 %ul#details
+  = gravatar_for @user
   %li
     Name:
     = @user.name

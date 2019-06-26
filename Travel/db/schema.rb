@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 2019_06_26_113524) do
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.integer "roles_mask"
+    t.string "avatar_url"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["favorite_place_id"], name: "index_users_on_favorite_place_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
