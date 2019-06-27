@@ -1,56 +1,76 @@
-<h2>Details about <%= @user.nickname %></h2>
+<h2>User Profile</h2>
 
-<ul id="details">
-  <%= gravatar_for @user %>
-  <li>
-    Name:
-    <%= @user.name %>
-  </li>
-  <li>
-    Surname:
-    <%= @user.surname %>
-  </li>
-  <li>
-    Birth Date:
-    <%= @user.birth_date %>
-  </li>
-  <li>
-    Nickname:
-    <%= @user.nickname %>
-  </li>
-  <li>
-    Email:
-    <%= @user.email %>
-  </li>
-  <li>
-    Favorite Place:
-    <% if(!@user.favorite_place.nil?) %>
+<div class="col-md-5 box">
+  <table style="width:90%">
+  <tr>
+    <th><%= gravatar_for @user %></th>
+    <th><h1><%= @user.name %></h1></th>
+    <th><h1><%= @user.surname %></h1></th>
+  </tr>
+  </table> 
+  <br/>
+</div>
+
+<div class="col-md-1"></div>
+
+<div class="col-md-6 box">
+  <div class="box">
+  <h3>
+  <strong>Name:</strong>
+  <%= @user.name %>
+  <br/>
+  <strong>Surname:</strong>
+  <%= @user.surname %>
+  <br/>
+  <strong>Birth Date:</strong>
+  <%= @user.birth_date %>
+  <br/>
+  <strong>Nickname:</strong>
+  <%= @user.nickname %>
+  <br/>
+  <strong>Email:</strong>
+  <%= @user.email %>
+  <br/>
+  </h3>
+  <h2><strong>Favorite Place:</strong></h2>
+    <h3><% if(!@user.favorite_place.nil?) %>
       <%= link_to "#{@user.favorite_place.name}", place_path(@user.favorite_place) %>
     <% else  %>
       <p></p>
       This user does not have a favorite place
-    <% end %>
-  </li>
-  <li>
-    Satisfaction Index:
-    <% if @user.num_dislikes == 0 %>
+    <% end %></h3>
+    
+  <h2><strong>Satisfaction Index:</strong></h2>
+    <h3><% if @user.num_dislikes == 0 %>
       <p></p>
       This user has no dislikes
     <% else %>
       <%= @user.num_likes / @user.num_dislikes %>
     <% end %>
-  </li>
-</ul>
-<h3>Bio:</h3>
-<p id="bio">
-  <%= @user.bio %>
-</p>
-
+    </h3>
     
-<% if current_user == @user %>
-  <%= link_to 'Edit info', edit_user_registration_path %>
-<%end%>
-<% if(current_user == @user || current_user.is?(:admin)) %>
-  <%= link_to 'Delete', user_path(@user), :method => :delete, :data => {confirm: 'Are you sure?'} %>
-<%end %>
-<%= link_to 'Back to Place list', places_path %>
+  <h2><strong>Bio:</strong></h2>
+  <h3><p id="bio">
+  <%= @user.bio %>
+  </p>
+  </h3>
+  </div>
+</div>
+
+<table style="width:70%">
+  <tr>
+  <th><% if current_user == @user %>
+    <%= link_to 'Edit info', edit_user_registration_path %>
+  <%end%>
+  </th>
+
+  <th><% if(current_user == @user || current_user.is?(:admin)) %>
+    <%= link_to 'Delete', user_path(@user), :method => :delete, :data => {confirm: 'Are you sure?'} %>
+  <%end %>
+  </th>
+  
+  <th>
+  <%= link_to 'Back to Place list', places_path %>
+  </th>
+  </tr>
+</table>
