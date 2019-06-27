@@ -1,65 +1,81 @@
-<h2>Details about <%= @place.name %> </h2>
-<ul id="details">
-  <li>
-    Street:
-    <%= @place.street %>
-  </li>
-  <li>
-    Address:
-    <%= @place.address %>
-  </li>
-  <li>
-    City:
-    <%= @place.city %>
-  </li>
-  <li>
-    Telephone Number:
-    <% if @place.telephone_number != '' %>
-      <%= @place.telephone_number %>
-    <% else %>
-      No telephone number for this place
-    <% end %>
-  </li>
-  <li>
-    Opening Time:
-    <% if !@place.opening_time.nil? %>
-      <%= @place.opening_time.strftime("%H:%M") %>
-    <% else %>
-      No opening time for this place
-    <% end %>
-  </li>
-  <li>
-    Closing Time:
-    <% if !@place.closing_time.nil? %>
-      <%= @place.closing_time.strftime("%H:%M") %>
-    <% else %>
-      No closing time for this place
-    <% end %>
-  </li>
-</ul>
-<h3>Description:</h3>
-<p id="description">
-  <%= @place.description %>
-</p>
-<h3>Notices:</h3>
-<p id="notices">
-  <%= @place.notices %>
-</p>
-<h3>Owner Profile:</h3>
-<% if !@place.user.nil? %>
-  <p id="owner">
-    <%= link_to 'Owner Profile', user_path(@place.user) %>
-  </p>
-<% else %>
-  <p></p>
-  No owner for this place...
+<div>
+<% if current_user == @place.user %>
+  <%= link_to 'Modifify', edit_place_path(@place) %> 
 <% end %>
+</div>
+
+<div class="col-md-3 box">
+    <h2>Details about <%= @place.name %> </h2>
+    <ul>
+      <li>Street:
+        <%= @place.street  %>
+      </li>
+      <li>
+        Address:
+        <%= @place.address %>
+      </li>
+      <li>
+        City:
+        <%= @place.city %>
+      </li>
+      <li>
+        Telephone Number:
+        <% if @place.telephone_number != '' %>
+          <%= @place.telephone_number %>
+        <% else %>
+          No telephone number for this place
+        <% end %>
+      </li>
+      <li>
+        Opening Time:
+        <% if !@place.opening_time.nil? %>
+          <%= @place.opening_time.strftime("%H:%M") %>
+        <% else %>
+          No opening time for this place
+      <% end %>
+      </li>
+      <li>
+        Closing Time:
+        <% if !@place.closing_time.nil? %>
+          <%= @place.closing_time.strftime("%H:%M") %>
+        <% else %>
+          No closing time for this place
+        <% end %>
+      </li>
+    </ul>
+    <h3>Description:</h3>
+    <p id="description">
+    <%= @place.description %>
+    </p>
+    <h3>Notices:</h3>
+    <p id="notices">
+    <%= @place.notices %>
+    </p>
+    <h3>Owner Profile:</h3>
+    <% if !@place.user.nil? %>
+      <p id="owner">
+      <%= link_to 'Owner Profile', user_path(@place.user) %>
+      </p>
+    <% else %>
+      <p></p>
+      No owner for this place...
+    <% end %>
+    <%= link_to 'Back to place list', places_path %>
+    <%= link_to 'Set as a favorite', set_favorite_path(:id => current_user.id, :place_id => @place.id) %>
+    <% if ( current_user.is?(:moderator) || current_user.is?(:admin)) %>
+      <% link_to 'Delete', place_path(@place), :method => :delete, :data => {confirm: 'Are you sure?'}; %>
+    <% end %>
+</div>
+
+<div class="col-md-1 box"></div>
+
+<div class="col-md-7 box">
 <h3>Reviews:</h3>
 <% if @place.reviews.empty? %>
   <p></p>
   No reviews for this place...
 <% else %>
-  <% if can? :read, Review %>
+    <% if can? :read, Review %>
     <% reviews = @place.reviews.sort_by { |r| r.dislikes.count - r.likes.count } %>
     <%  reviews.each do |r| %>
       <% u = User.find_by_id(r.user_id) %>
@@ -91,11 +107,4 @@
 <% end %>
 <%= link_to 'Add review', new_place_review_path(@place) %>
 <br/><br/> 
-<% if current_user == @place.user %>
-  <%= link_to 'Edit info', edit_place_path(@place) %> 
-<% end %>
-<% if ( current_user.is?(:moderator) || current_user.is?(:admin)) %>
-  <% link_to 'Delete', place_path(@place), :method => :delete, :data => {confirm: 'Are you sure?'}; %>
-<% end %>
-<%= link_to 'Back to place list', places_path %>
-<%= link_to 'Set as a favorite', set_favorite_path(:id => current_user.id, :place_id => @place.id) %>
+</div>
