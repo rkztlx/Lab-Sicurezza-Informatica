@@ -1,0 +1,52 @@
+<h2>Details about <%= @user.nickname %></h2>
+
+<ul id="details">
+  <%= gravatar_for @user %>
+  <li>
+    Name:
+    <%= @user.name %>
+  </li>
+  <li>
+    Surname:
+    <%= @user.surname %>
+  </li>
+  <li>
+    Birth Date:
+    <%= @user.birth_date %>
+  </li>
+  <li>
+    Nickname:
+    <%= @user.nickname %>
+  </li>
+  <li>
+    Email:
+    <%= @user.email %>
+  </li>
+  <li>
+    Favorite Place:
+    <% if(!@user.favorite_place.nil?) %>
+      <%= link_to "#{@user.favorite_place.name}", place_path(@user.favorite_place) %>
+    <% else  %>
+      <p></p>
+      This user does not have a favorite place
+    <% end %>
+  </li>
+  <li>
+    Satisfaction Index:
+    <% if @user.num_dislikes == 0 %>
+      <p></p>
+      This user has no dislikes
+    <% else %>
+      <%= @user.num_likes / @user.num_dislikes %>
+    <% end %>
+  </li>
+</ul>
+<h3>Bio:</h3>
+<p id="bio">
+  <%= @user.bio %>
+</p>
+
+    
+<%if current_user == @user; link_to 'Edit info', edit_user_registration_path; end%>
+<%if(current_user == @user || current_user.is?(:admin)); link_to 'Delete', user_path(@user), :method => :delete, :data => {confirm: 'Are you sure?'}; end %>
+<%= link_to 'Back to Place list', places_path %>
