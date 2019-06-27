@@ -1,7 +1,8 @@
-%h2 Create New Place
- 
+
 = form_tag '/places', :method => :post do
     = render :partial => 'place_form'
     = submit_tag 'Save Changes'
+    = link_to 'Cancel', places_path
+%div
+%div
 
-= link_to 'Cancel', places_path

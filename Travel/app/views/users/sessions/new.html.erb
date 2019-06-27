@@ -7,7 +7,6 @@
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), :class => "form-signin") do |f| %>
     <h2 class="card-header bg-dark text-white" style="text-align: center">Log In</h2><br/>
     <div>
-
         <div class="field">
           <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control", placeholder: "Email" %>
           <br/>
@@ -30,8 +29,6 @@
           <button type="button" class="btn btn-primary btn-block action" id="btn-signup" onclick="window.location.href='/users/sign_up'">Sign Up</button>
         </div>
         <% end %>
-
         <%= render "users/shared/links" %>
-
     </div>
 </div>
