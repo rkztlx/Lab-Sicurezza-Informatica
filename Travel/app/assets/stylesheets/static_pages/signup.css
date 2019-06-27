@@ -1,9 +1,11 @@
-/* sign in FORM */
+/* log in FORM */
 
 body{
-	background-image: url(../Signup.jpg) !important;
-	background-size:cover; 
-	background-repeat: no-repeat;
+	background-image: url(../10000011623-3.jpg) !important;
+	background-size: cover; 
+    background-repeat: no-repeat;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+    font-size: 13px;
 }
 
 #logreg-forms{
@@ -43,16 +45,16 @@ body{
     margin-bottom: 14px;
 }
 #logreg-forms .social-btn{
-    font-weight: 100;
+    font-weight: 400px;
     color: white;
-    /* [disabled]width: 298px; */
     font-size: 0.9rem;
 }
 
 #logreg-forms a{
-    display: block;
-    padding-top:10px;
-    color:lightseagreen;
+    display: inherit;
+    padding-top: 10px;
+    color: lightseagreen;
+    width: 150px;
 }
 
 #logreg-form .lines{
@@ -65,11 +67,9 @@ body{
 
 #logreg-forms .facebook-btn{  background-color:#3C589C; }
 
-#logreg-forms .google-btn{ background-color: #DF4B3B; }
-
 #logreg-forms .form-reset, #logreg-forms .form-signup{ display: none; }
 
-#logreg-forms .form-signup .social-btn{ width:210px; }
+#logreg-forms .form-signup { width:210px; }
 
 #logreg-forms .form-signup input { margin-bottom: 2px;}
 
@@ -78,10 +78,20 @@ body{
     margin: 0 auto;
 }
 
+#td1{
+	position: absolute;
+	margin: 0.75rem auto auto auto;
+}
+
+.btn{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+    font-size: 16px !important;
+}
+
 /* Mobile */
 
 @media screen and (max-width:500px){
-    #logreg-forms{
+    	#logreg-forms{
         width:300px;
     }
     
@@ -107,9 +117,5 @@ body{
     #logreg-forms  .facebook-btn:after{
         content:'Facebook';
     }
-  
-    #logreg-forms  .google-btn:after{
-        content:'Google+';
-    }
-    
+
 }
