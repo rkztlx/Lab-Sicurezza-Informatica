@@ -1,31 +1,57 @@
-%h1 All Users
- 
-%table#users
-  %thead
-    %tr
-      %th Index
-      %th Name
-      %th Surname
-      %th Birth Date
-      %th Nickname
-      %th Email
-      %th Favorite Places
-      %th Bio
-      %th Reviews
-      %th Likes
-  %tbody
-    - @users.each_with_index do |user,index|
-      %tr.row
-        %td= index
-        %td= user.name
-        %td= user.surname
-        %td= user.birth_date
-        %td= user.nickname
-        %td= user.email
-        %td= user.favorite_place
-        %td= user.bio
-        %td= user.num_reviews
-        %td= user.num_likes
-        %td= link_to "More about #{user.name}", user_path(user)
-        
-= link_to 'Add new user', new_user_path
+<h1>All Users</h1>
+<table id="users">
+  <thead>
+    <tr>
+      <th>Index</th>
+      <th>Name</th>
+      <th>Surname</th>
+      <th>Birth Date</th>
+      <th>Nickname</th>
+      <th>Email</th>
+      <th>Favorite Places</th>
+      <th>Bio</th>
+      <th>Reviews</th>
+      <th>Likes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each_with_index do |user,index| %>
+      <tr class="row">
+        <td>
+          <%= index %>
+        </td>
+        <td>
+          <%= user.name %>
+        </td>
+        <td>
+          <%= user.surname %>
+        </td>
+        <td>
+          <%= user.birth_date %>
+        </td>
+        <td>
+          <%= user.nickname %>
+        </td>
+        <td>
+          <%= user.email %>
+        </td>
+        <td>
+          <%= user.favorite_place %>
+        </td>
+        <td>
+          <%= user.bio %>
+        </td>
+        <td>
+          <%= user.num_reviews %>
+        </td>
+        <td>
+          <%= user.num_likes %>
+        </td>
+        <td>
+          <%= link_to "More about #{user.name}", user_path(user) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'Add new user', new_user_path %>
