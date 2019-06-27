@@ -19,10 +19,12 @@
           <button type="button" class="btn btn-danger" onclick="window.location.href='/users/<%= current_user.id%>'"><a> &nbsp; </a>Profile</button>
         </li>
       <%end%>
+      <% if user_signed_in? %>
       &nbsp;
       <li>
-        <button type="button" class="btn btn-danger" onclick="window.location.href='#'"><a> &nbsp; </a>My Reviews</button>
+        <button type="button" class="btn btn-danger" onclick="window.location.href='/places/my_reviews/<%= current_user.id%>'"><a> &nbsp; </a>My Reviews</button>
       </li>
+      <%end%>
       &nbsp;
       <li>
         <button type="button" class="btn btn-danger" onclick="window.location.href='/static_pages/help'"><a> &nbsp; </a>Help</button>

@@ -1,7 +1,13 @@
-= label :review, :rating, 'Votes'
-= select :review, :rating, [1,2,3,4,5]
- 
-= label :review, :comments, 'Comment'
-= text_field :review, :comments
+%div
+  .col-md-5.box
+    %div
+      .field
+
+        = label :review, :rating, 'Votes'
+        = select :review, :rating, [1,2,3,4,5]
+        %br/
+        %br/
+        = label :review, :comments, 'Comment'
+        = text_field :review, :comments
  
   

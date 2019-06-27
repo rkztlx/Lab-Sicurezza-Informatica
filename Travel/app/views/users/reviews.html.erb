@@ -1,5 +1,19 @@
-<h2>Reviews of <%= @user.name %> </h2>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 scroll">
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col"><h2>Reviews of <%= @user.name %> </h2></th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+
+
 <% if can? :read, Review %>
+  <% if @reviews.any? %>
     <% @reviews.each do |r| %>
         <% likes = r.likes.count %>
         <% dislikes = r.dislikes.count %>
@@ -16,15 +30,25 @@
         <% else %>
             <%= link_to 'Dislike', place_review_dislikes_path(r.place, r), :method => :post %>
         <% end %>
-        <%= link_to "Delete review", place_review_path(:id => r.id, :place_id => r.place.id), :method => :delete, :data => {confirm: 'Are you sure?'} %>
-        <%= link_to "Edit review", edit_place_review_path(:id => r.id, :place_id => r.place.id) %> 
-        <%= "To the place: " %> <%= link_to "#{r.place.name}", place_path(r.place) %> <br />
-    <% end %>
-    <br />
+    </div>
+  </div>
+</div>
+<div class="col-md-5 box">
+  <table style="width:90%">
+    <tr>
+      <th><%= link_to "Delete review", place_review_path(:id => r.id, :place_id => r.place.id), :method => :delete, :data => {confirm: 'Are you sure?'} %></th>
+      <th><%= link_to "Edit review", edit_place_review_path(:id => r.id, :place_id => r.place.id) %> </th>
+      <th><%= link_to 'Back to place list', places_path %></th>
+      <th><%= "To the place: " %> <%= link_to "#{r.place.name}", place_path(r.place) %> <br /></th>
+    </tr>
+  </table> 
+</div>
+    <%end%>
+  <%else%>
+    <h2>Non ci sono review associate a questo utente</h2>
+  <%end%>
 <% else %>
     <b>You don't have the rights to read reviews.</b>
 <% end %>
 
-<br/><br/> 
 
-<%= link_to 'Back to place list', places_path %>
