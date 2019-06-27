@@ -4,10 +4,20 @@
 </head>
 <body>
 <div id="logreg-forms">
+    <br/>
     <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign Up</h1>
         <div class="social-login">
-            <button class="btn facebook-btn social-btn btn-block" type="button"><span><em class="fab fa-facebook-f"></em> <strong>Sign up with Facebook</strong></span></button>
+        
+        
+        <button type="button" class="btn facebook-btn social-btn btn-block" onclick="" ><em class="fab fa-facebook-f"></em> <strong>Sign In with Facebook</strong></span>
+        </button>
+        <%- if devise_mapping.omniauthable? %>
+          <%- resource_class.omniauth_providers.each do |provider| %>
+            <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) %><br />
+          <% end %>
+        <% end %>
         </div>
+
         <p style="text-align:center"> OR  </p>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
@@ -34,7 +44,9 @@
           <%= f.submit "Sign Up", :class=>"btn btn-success btn-block action" %>
         </div>
         <br/>
-
         <% end %>
     </div>
 </body>
+
+
+
