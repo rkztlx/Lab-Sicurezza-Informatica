@@ -17,7 +17,7 @@
                     <a class="dropbtn" href='#'>MyReviews</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="dropbtn" href='#'>help</a>
+                    <a class="dropbtn" href='#'>Help</a>
                 </li>
                 <li class="nav-item active">
                     <a class="dropbtn" href='#'>Report</a>
@@ -29,31 +29,27 @@
     <h1>Insert place</h1>
 </div>
 <form>
-    <div class="left">
-        <div class="container">
-            <label for="Name"><b>Name</b></label>
-            <input type="text" placeholder="Name" name="Name..." required>
+    <div>
+        <%= label :place, :name, 'Name' %>
+        <%= text_field :place, :name, required: true %>
+        <%= label :place, :street, 'Street' %>
+        <%= text_field :place, :street, required: true %>
+        <%= label :place, :address, 'Address' %>
+        <%= number_field :place, :address, min: 1, required: true %>
+        <%= label :place, :city, 'City' %>
+        <%= text_field :place, :city, required: true %>
+        <%= label :place, :telephone_number, "Telephone Number" %>
+        <%= telephone_field :place, :telephone_number %>
+
+        <%= label :place, :opening_time, "Opening Time" %>
+        <%= time_field :place, :opening_time %>
+        <%= label :place, :closing_time, "Closing Time" %>
+        <%= time_field :place, :closing_time %>
+        <%= label :place, :description, "Description" %>
+        <%= text_area :place, :description, cols: 20, rows: 40 %>
+        <%= label :place, :notices, "Notices" %>
+        <%= text_area :place, :notices, cols: 20, rows: 40 %>
         </div>
-        <label for="Street"><b>Street</b></label>
-        <input type="text" placeholder="Street" name="Street..." required>
-    </div>
-    <label for="City"><b>City</b></label>
-    <input type="text" placeholder="City" name="City..." required>
-    </div>
-    <label for="place"><b>Telephone number</b></label>
-    <input type="text" placeholder="Number" name="Number..." required>
-    </div>
-    </div>
-    <div class="right">
-         da inserire img con ruby 
-        <label for="Description"><b>Description</b></label>
-        <input type="textarea" placeholder="Description" name="Description..." required>
-        <label for="Description"><b>Notices</b></label>
-        <input type="textarea" placeholder="Notices" name="Notices..." required>
-    </div>
-    <div class="container" style="background-color:#f1f1f1">
-        <button type="button" class="cancelbtn">Insert</button>
-    </div>
 </form>
 
 </html>
