@@ -15,7 +15,8 @@ Rails.application.routes.draw do
   get 'places/my_reviews/:id', to: 'users#reviews', as: 'my_reviews'
   
   get 'static_pages/home'
-
+  
+  get 'static_pages/help'
   root :to  => redirect('/static_pages/home')
 
 end
