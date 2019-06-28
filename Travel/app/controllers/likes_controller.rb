@@ -4,6 +4,7 @@ class LikesController < ApplicationController
     before_action :find_like, only: [:destroy]
     
     def create
+        authorize! :update, @review, :message => "BEWARE: You are not authorized to update a review"
         @review.likes.create(user_id: current_user.id)
         @user = @review.user
         @user.num_likes += 1
@@ -17,6 +18,7 @@ class LikesController < ApplicationController
     end
 
     def destroy
+        authorize! :update, @review, :message => "BEWARE: You are not authorized to update a review"
         if !(already_liked?)
             flash[:notice] = "Cannot unlike"
         else

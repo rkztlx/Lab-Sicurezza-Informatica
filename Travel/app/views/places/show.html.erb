@@ -69,6 +69,7 @@
     <% if ( current_user.is?(:moderator) || current_user.is?(:admin)) %>
       <%= link_to 'Delete', place_path(@place), :method => :delete, :data => {confirm: 'Are you sure?'}; %>
     <% end %>
+    <%= link_to "Find route", find_route_path %>
 </div>
 
 <div class="col-md-1 box"></div>

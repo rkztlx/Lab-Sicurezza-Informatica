@@ -3,13 +3,19 @@ class PlacesController < ApplicationController
     before_action :authenticate_user!
     
     def index
-        @places = Place.all
+        if current_user.is? :admin
+            @places = Place.all
+        else
+            flash[:warning] = "You are not authorized to read all places"
+            redirect_to root_path
+        end
     end
     
     def show
         begin
-            id = params[:id] # retrieve movie ID from URI route
-            @place = Place.find(id) # look up movie by unique ID
+            id = params[:id] # retrieve place ID from URI route
+            @place = Place.find(id)
+            authorize! :read, @place, :message => "BEWARE: You are not authorized to read a place."
         rescue ActiveRecord::RecordNotFound 
             redirect_to :controller => "places", :action => "index"
             flash[:warning] = "There is no place with that index"
@@ -80,6 +86,18 @@ class PlacesController < ApplicationController
     
     def find
         @places = Place.where(name: params[:name])
+        authorize! :read, @places, :message => "BEWARE: You are not authorized to find a place."
+    end
+
+    def find_route
+        # default: render ’find_route’ template
+    end
+    
+    def display_route
+        @facilities = params[:facilities].gsub! ' ', '+'
+        @departureAddress = params[:From].gsub! ' ', '+'
+        @desiredDestination = @place.street.gsub! ' ', '+'
+        # default: render ’display_route’ template
     end
 
 end

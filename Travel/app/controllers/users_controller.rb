@@ -3,13 +3,19 @@ class UsersController < ApplicationController
     before_action :authenticate_user!
     
     def index
-        @users = User.all
+        if current_user.is? :admin
+            @users = User.all
+        else
+            flash[:warning] = "You cannot have access to the list of all users"
+            redirect_to root_path
+        end
     end
     
     def show
         begin
             id = params[:id] #retrieve user ID from URI route
             @user = User.find(id) # look up id bi unique ID
+            authorize! :read, @user, :message => "BEWARE: You are not authorized to read an user."
         rescue ActiveRecord::RecordNotFound
             redirect_to :controller => "users", :action => "index"
             flash[:warning] = "There is no user with that index"
@@ -34,7 +40,7 @@ class UsersController < ApplicationController
 
     def edit
         @user = User.find params[:id]
-        authorize! :update, @user, :message => "BEWARE: You are not authorized to edit a place."
+        authorize! :update, @user, :message => "BEWARE: You are not authorized to edit an user."
         if current_user != @user
             flash[:warning] = "You are not authorized to edit this user"
             redirect_to user_path(@user)
@@ -43,7 +49,7 @@ class UsersController < ApplicationController
 
     def update
         @user = User.find params[:id]
-        authorize! :update, @user, :message => "BEWARE: You are not authorized to update this user."
+        authorize! :update, @user, :message => "BEWARE: You are not authorized to update an user."
         if current_user != @user
             flash[:warning] = "You are not authorized to update this user"
             redirect_to user_path(@user)
@@ -73,6 +79,7 @@ class UsersController < ApplicationController
 
     def favorite
         @user = User.find(params[:id])
+        authorize! :update, @user, :message => "BEWARE: You are not authorized to update an user."
         @place = Place.find(params[:place_id])
         @user.favorite_place = @place
         @user.save!
@@ -83,6 +90,7 @@ class UsersController < ApplicationController
     def reviews
         @user = User.find(params[:id])
         @reviews = @user.reviews
+        authorize! :read, @reviews, :message => "BEWARE: You are not authorized to read a review."
         # default: render ’reviews’ template
     end
 

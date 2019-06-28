@@ -23,6 +23,10 @@ Rails.application.routes.draw do
   get '/users/:id/promote', to: 'users#promote', as: 'promote_user'
   
   get '/users/:id/demote', to: 'users#demote', as: 'demote_user'
+
+  get '/places/:id/find_route', to: 'places#find_route',  as: 'find_route'
+
+  get '/places/:id/display_route', to: 'places#display_route',  as: 'display_route'
   
   get 'static_pages/home'
   

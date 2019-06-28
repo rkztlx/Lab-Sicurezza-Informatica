@@ -1,0 +1,11 @@
+<h2>Find route</h2>
+
+<%= form_tag display_route_path, method: :get do %>
+    <%= label_tag :From %>
+    <%= text_field_tag :From %>
+    <%= label_tag :Car %>
+    <%= radio_button_tag :Facilities, "Car" %>
+    <%= label_tag :PublicTransport %>
+    <%= radio_button_tag :Facilities, "Public Transport" %>
+    <%= submit_tag "Find", name: nil %>
+<% end %>
