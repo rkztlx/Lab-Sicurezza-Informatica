@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-11 scroll">
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col"><h1>All Users</h1></th>
+          </tr>
+        </thead>
+      </table>
+
+<table style="width:100%">
+  <thead>
+    <tr>
+      <th>Index</th>
+      <th>Name</th>
+      <th>Surname</th>
+      <th>Birth Date</th>
+      <th>Nickname</th>
+      <th>Email</th>
+      <th>Favorite Place</th>
+      <th>Bio</th>
+      <th>Likes</th>
+      <th>Dislikes</th>
+      <th>Roles</th>
+    </tr>
+  </thead>
+    <% @users.each_with_index do |user,index| %>
+      <tbody>
+        <td rowspan="1">
+          <%= index %>
+        </td>
+        <td rowspan="1">
+          <%= user.name %>
+        </td>
+        <td rowspan="1">
+          <%= user.surname %>
+        </td>
+        <td rowspan="1">
+          <%= user.birth_date %>
+        </td>
+        <td rowspan="1">
+          <%= user.nickname %>
+        </td>
+        <td rowspan="1">
+          <%= user.email %>
+        </td>
+        <td rowspan="1">
+          <%= user.favorite_place %>
+        </td>
+        <td rowspan="1">
+          <%= user.bio %>
+        </td>
+        <td rowspan="1">
+          <%= user.num_likes %>
+        </td>
+        <td rowspan="1">
+          <%= user.num_dislikes %>
+        </td>
+        <td rowspan="1">
+          <%= user.role_strings.map(&:inspect).join(',') %>
+        </td>
+        <td rowspan="1">
+          <%= link_to "More about #{user.name}", user_path(user) %>
+        </td>
+    <% end %>
+    </tbody>
+  </table>

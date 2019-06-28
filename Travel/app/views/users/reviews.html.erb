@@ -4,7 +4,7 @@
       <table class="table table-striped">
         <thead class="thead-dark">
           <tr>
-            <th scope="col"><h2>Reviews of <%= @user.name %> </h2></th>
+            <th align="center"><h2>Reviews of <%= @user.name %> </h2></th>
           </tr>
         </thead>
         <tbody>
@@ -22,7 +22,8 @@
           <td align="center"><% dislikes = r.dislikes.count %></td>
           <td align="center"><% pre_like = r.likes.find { |like| like.user_id == @user.id} %></td>
           <td align="center"><% pre_dislike = r.dislikes.find { |dislike| dislike.user_id == @user.id} %></td>
-          <td align="center"><b> <%= r.rating %> </b> (<i><%= @user.email %></i>) <%= r.comments %> - <%= likes %> <%= (r.likes.count) == 1 ? 'Like' : 'Likes' %></td>
+          <td align="center"><b> <%= r.rating %> </b> (<i><%= @user.email %></i>) <%= r.comments %> </td>
+          <td align="center"><%= likes %> <%= (r.likes.count) == 1 ? 'Like' : 'Likes' %></td>
           <% if pre_like %>
               <td align="center"><%= link_to "Unlike", place_review_like_path(r.place, r, pre_like), :method => :delete %></td>
           <% else %>

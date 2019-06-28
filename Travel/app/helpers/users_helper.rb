@@ -8,7 +8,7 @@ module UsersHelper
       else
         gravatar_url = user.avatar_url
       end
-      image_tag(gravatar_url, alt: user.avatar_url, class: "gravatar")
+      image_tag(gravatar_url, alt: user.avatar_url, class: "gravatar",  size: "180x180")
   end
   
 end

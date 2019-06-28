@@ -1,13 +1,5 @@
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="../../assets/bootstrap.min.css" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <link rel="stylesheet" href="../../../assets/static_pages/signup.css">
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <div id="logreg-forms">
@@ -15,7 +7,9 @@
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
+  <%= render "users/shared/links" %>
   <h2 class="card-header bg-dark text-white" style="text-align: center">Sign Up</h2><br/>
+
   <div>
     
     <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control", placeholder: "Email" %>
@@ -32,7 +26,9 @@
       <%= f.password_field :password, autocomplete: "new-password", :class => "form-control", placeholder: "Password Confirmation" %><br/>
 
       <%= f.text_field :name, :class => "form-control", placeholder: "Name" %>
+      <br/>
       <%= f.text_field :surname, :class => "form-control", placeholder: "Surname" %>
+      <br/>
       <%= f.text_field :nickname, :class => "form-control", placeholder: "Nickname" %>
       <br/>
       <div class="field">
@@ -47,9 +43,6 @@
       </div>
 
       <% end %>
-
-      <%= render "users/shared/links" %>
-
     </div>
 
     </div>

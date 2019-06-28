@@ -4,27 +4,15 @@
     </div>
     <div class="box">
         <div align="center">
+        
             <h1>Top Places</h1><br/>
-            <div class="boxphoto">
-                <%= image_tag("/assets/tonnarello.jpg") %>
-                <h3>Tonnarello</h3>
-                <p>Rome</p>
-            </div>
-            <div class="boxphoto">
-                <%= image_tag("/assets/cappella_sistina.jpg") %>
-                <h3>Cappella Sistina</h3>
-                <p>Rome</p>
-            </div>
-            <div class="boxphoto">
-                <%= image_tag("/assets/duomo.jpg") %>
-				<h3>D'Uomo</h3>
-                <p>Milano</p>
-            </div>
-            <div class="boxphoto">
-                <%= image_tag("/assets/Sorbillo.jpg") %>
-				<h3>Sorbillo</h3>
-                <p>Napoli</p>
-            </div>
+            <% Place.order(:avarage => 'desc').limit(4).each do |place| %>
+                <div class="boxphoto">
+                    <%= icon_for place%>
+                    <h3><%= place.name %></h3>
+                    <p><%= place.city %></p>
+                </div>
+            <%end%>
         </div>
     </div>
 
@@ -32,22 +20,12 @@
         <div class="title">
             <h1>Top Users</h1>
         </div>
-        <div class="boxphoto">
-            <img src="https://templated.co/items/demos/theory/images/pic03.jpg">
-            <h3>Magna</h3>
-        </div>
-        <div class="boxphoto">
-            <img src="https://templated.co/items/demos/theory/images/pic04.jpg">
-            <h3>Ipsum</h3>
-        </div>
-        <div class="boxphoto">
-            <img src="https://templated.co/items/demos/theory/images/pic05.jpg">
-            <h3>Tempus</h3>
-        </div>
-        <div class="boxphoto">
-            <img src="https://templated.co/items/demos/theory/images/pic06.jpg">
-            <h3>Dolore</h3>
-        </div>
+        <% User.order(:num_dislikes,num_likes: :desc).limit(4).each do |user| %>
+                <div class="boxphoto">
+                    <%= gravatar_for user%>
+                    <h3><%= user.name %></h3>
+                </div>
+            <%end%>
 
     </div>
 

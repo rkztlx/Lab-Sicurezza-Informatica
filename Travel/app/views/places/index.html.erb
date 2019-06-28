@@ -25,48 +25,45 @@
       <th>Notices</th>
     </tr>
   </thead>
-</table>
     <% @places.each_with_index do |place,index| %>
-      <table style="width:100%">
         <tbody>
-          <tr>
-          <td>
+          <td rowspan="1">
             <%= index %>
           </td>
-          <td>
+          <td rowspan="1">
             <%= place.name %>
           </td>
-          <td>
+          <td rowspan="1">
             <%= place.street %>
           </td>
-          <td>
+          <td rowspan="1">
             <%= place.address %>
           </td>
-          <td>
+          <td rowspan="1">
             <%= place.city %>
           </td>
-          <td>
+          <td rowspan="1">
             <%= place.telephone_number %>
           </td>
-          <td>
+          <td rowspan="1">
             <%= if(!place.opening_time.nil?); place.opening_time.strftime("%H:%M"); else  "-"; end; %>
           </td>
-          <td>
+          <td rowspan="1">
             <%= if(!place.closing_time.nil?); place.closing_time.strftime("%H:%M"); else  "-"; end; %>
           </td>
-          <td>
+          <td rowspan="1">
             <%= place.description %>
           </td>
-          <td>
+          <td rowspan="1">
             <%= place.notices %>
           </td>
-          <td>
+          <td rowspan="1">
             <%= link_to "More about #{place.name}", place_path(place) %>
           </td>
-          </tr>
+        <% end %>
         </tbody>
     </table>
-    <% end %>
+
 <br/>
 
 <th><%= link_to 'Add new place', new_place_path %></th>
