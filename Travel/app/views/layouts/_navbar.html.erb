@@ -13,6 +13,12 @@
       <li>
         <button type="button" class="btn btn-danger" onclick="window.location.href='/places'"><a> &nbsp; </a>Places</button>
       </li>
+      <% if(!current_user.nil? && current_user.is?(:admin)) %>
+        &nbsp;
+        <li>
+          <button type="button" class="btn btn-danger" onclick="window.location.href='/users'"><a> &nbsp; </a>Users</button>
+        </li>
+      <%end%>
       <% if user_signed_in? %>
         &nbsp;
         <li>
