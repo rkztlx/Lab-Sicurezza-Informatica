@@ -83,7 +83,33 @@ class UsersController < ApplicationController
         @reviews = @user.reviews
         # default: render ’reviews’ template
     end
-        
+
+    def ban
+        if current_user.is? :admin
+            @user = User.find(params[:id])
+            @user.roles = @user.roles << :banned
+            @user.save!
+            flash[:notices] = "The user #{@user.name} has been successfully banned"
+        else
+            flash[:warning] = "You cannot ban another user"
+        end
+        redirect_to user_path(@user)
+    end
+
+    def unban
+        if current_user.is? :admin
+            @user = User.find(params[:id])
+            @user.roles = @user.roles.reject{ |k| k==:banned}
+            @user.save!
+            flash[:notices] = "The user #{@user.name} has been successfully unbanned"
+        else
+            flash[:warning] = "You cannot unban another user"
+        end
+        redirect_to user_path(@user)
+    end
+
+
+
     
     def user_params_create
         params[:user].permit(:name, :surname, :birth_date, :nickname, :email, :password, :password_confirmation, :bio)
@@ -92,4 +118,5 @@ class UsersController < ApplicationController
     def user_params_update
         params[:place].permit(:name, :surname, :birth_date, :nickname, :email, :password, :password_confirmation, :favorite_places, :bio)
     end
+
 end

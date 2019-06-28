@@ -87,7 +87,7 @@
       <% dislikes = r.dislikes.count %>
       <% pre_like = r.likes.find { |like| like.user_id == current_user.id} %>
       <% pre_dislike = r.dislikes.find { |dislike| dislike.user_id == current_user.id} %>
-      <b> <%= r.rating %> </b> (<i><%= u.email %></i>) <%= r.comments %> - <%= likes %> <%= (r.likes.count) == 1 ? 'Like' : 'Likes' %>
+      <b> <%= r.rating %> </b> (<i><%= u.email %></i> - <i><%= link_to 'View profile', user_path(u) %></i>) <%= r.comments %> - <%= likes %> <%= (r.likes.count) == 1 ? 'Like' : 'Likes' %>
       <% if pre_like %>
         <%= link_to "Unlike", place_review_like_path(@place, r, pre_like), :method => :delete %>
       <% else %>
