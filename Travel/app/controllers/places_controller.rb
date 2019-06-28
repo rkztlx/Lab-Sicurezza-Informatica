@@ -24,7 +24,7 @@ class PlacesController < ApplicationController
 
     def create
         @owner = current_user
-        @place = @owner.property.build(params[:place].permit(:name, :street, :address, :city, :telephone_number, :opening_time, :closing_time, :description, :notices))
+        @place = @owner.property.build(params[:place].permit(:name, :street, :address, :city, :telephone_number, :opening_time, :closing_time, :description, :notices, :icon))
         authorize! :create, @place, :message => "BEWARE: You are not authorized to create a new place."
         @place.save!
         if !(@owner.is?(:owner))
@@ -56,7 +56,7 @@ class PlacesController < ApplicationController
             flash[:warning] = "You are not authorized to update this place"
             redirect_to place_path(@place)
         end
-        @place.update_attributes!(params[:place].permit(:name, :street, :address, :city, :telephone_number, :opening_time, :closing_time, :description, :notices))
+        @place.update_attributes!(params[:place].permit(:name, :street, :address, :city, :telephone_number, :opening_time, :closing_time, :description, :notices, :icon))
         respond_to do |client_wants|
             client_wants.html {
                 flash[:notice] = "#{@place.name} was successfully updated."

@@ -2,6 +2,7 @@
  
 = form_tag place_path(@place), :method => :put do
     = render :partial => 'place_form'
-    = submit_tag 'Update Place Info'
+    = submit_tag 'Save Changes'
+    
 
 = link_to 'Cancel', places_path

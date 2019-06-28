@@ -5,10 +5,10 @@ module PlacesHelper
       
     if place.icon == nil || place.icon == ""
         icon = "#{root_url}assets/place.png"
-      else
+    else
         icon = place.icon
-      end
-      image_tag(icon, alt: place.icon, class: "gravatar",  size: "180x180")
+    end
+    image_tag(icon, alt: place.icon, class: "gravatar",  size: "180x180")
   end
   
 end
