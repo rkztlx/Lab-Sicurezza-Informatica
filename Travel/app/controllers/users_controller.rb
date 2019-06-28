@@ -60,9 +60,11 @@ class UsersController < ApplicationController
 
     def destroy
         @user = User.find(params[:id])
-        if (@user.id == current_user.id) || (current_user.is? :admin)
+        if (@user.id == current_user.id || (current_user.is?(:admin) && !@user.is?(:admin)))
             @user.destroy
             flash[:notice] = "User #{@user.name} deleted."
+        elsif (current_user.is?(:admin) && @user.is?(:admin))
+            flash[:warning] = "You cannot delete another admin's profile"
         else
             flash[:warning] = "You cannot delete another user's profile"
         end
