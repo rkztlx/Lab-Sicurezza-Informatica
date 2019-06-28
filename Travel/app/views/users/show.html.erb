@@ -57,6 +57,31 @@
 
   <h2> <strong>Roles:</strong> </h2>
   <h3> <%= @user.role_strings.join(', ') %> </h3>
+
+  <% if(current_user.is?(:admin) && !@user.is?(:banned) &&  !@user.is?(:admin))%>
+    
+    <h2> <strong> Promote as: </strong> </h2>
+    <%= form_tag promote_user_path(@user), method: :get do %>
+      <% if !@user.is? :moderator %>
+        <%= label_tag :moderator %>
+        <%= radio_button_tag :role, "Moderator" %>
+      <% end %>
+      <%= label_tag :admin %>
+      <%= radio_button_tag :role, "Admin" %>
+      <%= submit_tag "Promote", name: nil %>
+    <% end %>
+
+    <% if @user.is? :moderator %>
+      <h2> <strong> Demote as: </strong> </h2>
+      <%= form_tag demote_user_path(@user), method: :get do %>
+        <%= label_tag :moderator %>
+        <%= radio_button_tag :role, "Moderator" %>
+        <%= submit_tag "Demote", name: nil %>
+      <% end %>
+    <% end %>
+
+
+  <% end %>
   
   </div>
 

@@ -108,8 +108,40 @@ class UsersController < ApplicationController
         redirect_to user_path(@user)
     end
 
+    def promote
+        if current_user.is? :admin
+            @user = User.find(params[:id])
+            if params[:role] == "Moderator"
+                @user.roles = @user.roles << :moderator
+                @user.save!
+                flash[:notices] = "The user #{@user.name} has benn successfully promoted as moderator"
+            else
+                if !@user.is? :moderator
+                    @user.roles = @user.roles << :moderator
+                end
+                @user.roles = @user.roles << :admin
+                @user.save!
+                flash[:notices] = "The user #{@user.name} has benn successfully promoted as admin"
+            end
+        else
+            flash[:warning] = "You cannot promote another user"
+        end
+        redirect_to user_path(@user)
+    end
 
-
+    def demote
+        if current_user.is? :admin
+            @user = User.find(params[:id])
+            if params[:role] == "Moderator"
+                @user.roles = @user.roles.reject{ |k| k==:moderator}
+                @user.save!
+                flash[:notices] = "The user #{@user.name} has been successfully demoted from moderator"
+            end
+        else
+            flash[:warning] = "You cannot demote another user"
+        end
+        redirect_to user_path(@user)
+    end
     
     def user_params_create
         params[:user].permit(:name, :surname, :birth_date, :nickname, :email, :password, :password_confirmation, :bio)

@@ -53,7 +53,7 @@ class User < ApplicationRecord
   private
   
   def set_default_role
-    self.roles = [:user, :admin]
+    self.roles = [:user]
   end
   
   def self.parse_name(user, name)
