@@ -1,6 +1,6 @@
 class Place < ActiveRecord::Base
 
-    before_create :set_default_avarage
+    before_create :set_default_average
     has_many :reviews
     belongs_to :user, optional: true
     #attr_accessible :name, :street, :address, :city, :telephone_number, :opening_time, :closing_time, :description, :notices
@@ -11,8 +11,8 @@ class Place < ActiveRecord::Base
 
     private
     
-    def set_default_avarage
-        self.avarage = 0
+    def set_default_average
+        self.average = 0
     end
 
 end
