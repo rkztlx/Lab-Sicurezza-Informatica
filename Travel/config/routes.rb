@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   resources :users
 
   get '/places/:place_id/set_favorite/:id', to: 'users#favorite', as: 'set_favorite'
+  
+  get '/static_pages/home/find', to: 'places#find', as: 'find_place'
 
   get '/places/my_reviews/:id', to: 'users#reviews', as: 'my_reviews'
 

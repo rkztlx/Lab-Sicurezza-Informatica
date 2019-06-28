@@ -6,8 +6,7 @@
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
-
-  <%= render "users/shared/links" %>
+<a href="/users/auth/facebook"><button type='button' class='btn facebook-btn social-btn' style = "padding: 8px 75px;"><i class='fa fa-facebook'></i>  &nbsp; Sign in with Facebook</button></a><br />
   <h2 class="card-header bg-dark text-white" style="text-align: center">Sign Up</h2><br/>
 
   <div>

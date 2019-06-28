@@ -1,8 +1,12 @@
 <h1 style = 'text-align:center'><strong>Travel with US!</strong></h1><br>
-    <div id="search">
-    <input type="email" id="inputEmail" class="form-control" placeholder="Find a place" required="" autofocus="">
     
+    <div id="search">
+    <%= form_tag find_place_path, method: :get do %>
+        <%= text_field_tag 'name',nil, placeholder: 'Enter the name of the place to search', size: 64 %>
+        <%= submit_tag 'Search', :class=>"btn btn-danger btn-block action" %>
+    <%end%>
     </div>
+    
     <div class="box">
         <div align="center">
         

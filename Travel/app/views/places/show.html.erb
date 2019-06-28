@@ -1,6 +1,6 @@
 <div>
 <% if current_user == @place.user %>
-  <%= link_to 'Modifify', edit_place_path(@place) %> 
+  <button type="button" class="btn btn-danger" onclick="window.location.href='/places/<%= @place.id %>/edit'"><a></a><h5>Modify</h5></button>
 <% end %>
 </div>
 

@@ -78,5 +78,8 @@ class PlacesController < ApplicationController
         redirect_to places_path
     end
     
+    def find
+        @places = Place.where(name: params[:name])
+    end
 
 end
