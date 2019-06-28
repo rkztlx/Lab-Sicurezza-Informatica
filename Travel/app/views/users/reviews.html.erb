@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 scroll">
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th><h2>Reviews of <%= @user.name %> </h2></th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+
+
+<% if can? :read, Review %>
+  <% if @reviews.any? %>
+    <font size="3" >
+    <table style="width:100%">
+    <% @reviews.each do |r| %>
+    <tbody>
+          <td rowspan="1"><% likes = r.likes.count %></td>
+          <td rowspan="1"><% dislikes = r.dislikes.count %></td>
+          <td rowspan="1"><% pre_like = r.likes.find { |like| like.user_id == @user.id} %></td>
+          <td rowspan="1"><% pre_dislike = r.dislikes.find { |dislike| dislike.user_id == @user.id} %></td>
+          <td rowspan="1"><b> <%= r.rating %> </b> (<i><%= @user.email %></i>) <%= r.comments %> </td>
+          <td rowspan="1"><%= likes %> <%= (r.likes.count) == 1 ? 'Like' : 'Likes' %></td>
+          <% if pre_like %>
+              <td rowspan="1"><%= link_to "Unlike", place_review_like_path(r.place, r, pre_like), :method => :delete %></td>
+          <% else %>
+              <td rowspan="1"><%= link_to 'Like', place_review_likes_path(r.place, r), :method => :post %></td>
+          <% end %> 
+          <td rowspan="1"><%= dislikes %> <%= (r.dislikes.count) == 1 ? 'Dislike' : 'Dislikes' %></td>
+          <% if pre_dislike %>
+              <td rowspan="1"><%= link_to "Undislike", place_review_dislike_path(r.place, r, pre_dislike), :method => :delete %></td>
+          <% else %>
+              <td rowspan="1"><%= link_to 'Dislike', place_review_dislikes_path(r.place, r), :method => :post %></td>
+          <% end %>
+        
+          <td rowspan="1"><%= link_to "Delete review", place_review_path(:id => r.id, :place_id => r.place.id), :method => :delete, :data => {confirm: 'Are you sure?'} %></td>
+          <td rowspan="1"><%= link_to "Edit review", edit_place_review_path(:id => r.id, :place_id => r.place.id) %></td>
+          <td rowspan="1"><%= link_to 'Back to place list', places_path %></td>
+          <td rowspan="1"><%= "To the place: " %> <%= link_to "#{r.place.name}", place_path(r.place) %></td>
+        </tbody>
+    <%end%>
+   </table>
+    </font>
+  <%else%>
+    <h2>There aren't reviews associated with that user</h2>
+  <%end%>
+<% else %>
+    <b>You don't have the centers to read reviews.</b>
+<% end %>
+    </div>
+  </div>
+</div>
+

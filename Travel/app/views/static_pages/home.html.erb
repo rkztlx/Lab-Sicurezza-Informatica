@@ -1,0 +1,45 @@
+<% if ( !current_user.nil? && current_user.is?(:banned)) %>
+    <h1> You was Banned, you can't acces the site </h1>
+<%else%>
+
+    <h1 style = 'text-align:center'><strong>Travel with US!</strong></h1><br>
+        
+        <font size="3" >
+        <div id="search">
+        <%= form_tag find_place_path, method: :get do %>
+            <%= text_field_tag 'name',nil, placeholder: 'Enter the name of the place to search', size:37 %>
+            <%= submit_tag 'Search', :class=>"btn btn-danger btn-block action" %>
+        <%end%>
+        </div>
+        </font>
+        
+        <div class="box">
+            <div align="center">
+            
+                <h1>Top Places</h1><br/>
+                <% Place.order(:avarage => 'desc').limit(4).each do |place| %>
+                    <div class="boxphoto">
+                        <%= icon_for place%>
+                        <h3><%= place.name %></h3>
+                        <p><%= place.city %></p>
+                        <p><button type="button" class="btn btn-danger" style = "padding: 8px 60px;" onclick="window.location.href='/places/<%= place.id %>'"><a></a><h5>Visita!</h5></button></p>
+                    </div>
+                <%end%>
+            </div>
+        </div>
+
+        <div class="boxp">
+            <div class="title">
+                <h1>Top Users</h1>
+            </div>
+            <% User.order(:num_dislikes,num_likes: :desc).limit(4).each do |user| %>
+                    <div class="boxphoto">
+                        <%= gravatar_for user%>
+                        <h3><%= user.name %></h3>
+                        <p><button type="button" class="btn btn-danger" style = "padding: 8px 60px;" onclick="window.location.href='/users/<%= user.id %>'"><a></a><h5>Visita!</h5></button></p>
+                    </div>
+                <%end%>
+
+        </div>
+<%end%>
+

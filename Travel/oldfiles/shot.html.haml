@@ -1,0 +1,36 @@
+
+%h2 Details about #{@user.name}
+ 
+%ul#details
+  %li
+    Name:
+    = @user.name
+  %li
+    Surname:
+    = @user.surname
+  %li
+    Birt Date:
+    = @user.birth_date
+  %li
+    Nickname:
+    = @user.nickname
+  %li
+    Email:
+    = @user.email
+  %li
+    Favorite Places:
+    = @user.favorite_places
+ 
+%h3 Bio:
+ 
+%p#bio= @user.bio
+
+%ul#details
+  %li
+    Reviews:
+    = @user.num_reviews
+  %li
+    Likes:
+    = @user.num_likes
+ 
+= link_to 'Back to users list', users_path

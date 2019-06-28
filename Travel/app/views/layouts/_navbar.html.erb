@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  &nbsp;  &nbsp;
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li>
+        <button type="button" class="btn btn-danger" onclick="window.location.href='/static_pages/home'"><a> &nbsp; </a>Home</button>
+      </li>
+      &nbsp;
+      <li>
+        <button type="button" class="btn btn-danger" onclick="window.location.href='/places'"><a> &nbsp; </a>Places</button>
+      </li>
+      <% if(!current_user.nil? && current_user.is?(:admin)) %>
+        &nbsp;
+        <li>
+          <button type="button" class="btn btn-danger" onclick="window.location.href='/users'"><a> &nbsp; </a>Users</button>
+        </li>
+      <%end%>
+      <% if user_signed_in? %>
+        &nbsp;
+        <li>
+          <button type="button" class="btn btn-danger" onclick="window.location.href='/users/<%= current_user.id%>'"><a> &nbsp; </a>Profile</button>
+        </li>
+      <%end%>
+      <% if user_signed_in? %>
+      &nbsp;
+      <li>
+        <button type="button" class="btn btn-danger" onclick="window.location.href='/places/my_reviews/<%= current_user.id%>'"><a> &nbsp; </a>My Reviews</button>
+      </li>
+      <%end%>
+      &nbsp;
+      <li>
+        <button type="button" class="btn btn-danger" onclick="window.location.href='/static_pages/help'"><a> &nbsp; </a>Help</button>
+      </li>
+      &nbsp;
+      <!--<li>
+        <button type="button" class="btn btn-danger" onclick="window.location.href='#'"><a> &nbsp; </a>Report</button>
+      </li>-->
+    </ul>
+  </div>
+  &nbsp;&nbsp;
+
+<% if !user_signed_in? %>
+    <button type="button" class="btn btn-danger" onclick="window.location.href='/users/sign_in'"><a> &nbsp; </a>Sign In</button>
+<% end %>
+
+
+<% if user_signed_in? %>
+  <div class="d-flex">
+    <div class="btn-group">
+      <a class="btn btn-danger" href="/users/sign_out" data-method="delete"> &nbsp; Log Out</a>
+      </div>
+    </div>
+  </div>
+<%end%>
+</nav>
+
+

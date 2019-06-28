@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-11 scroll">
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col"><h1>All Places</h1></th>
+          </tr>
+        </thead>
+      </table>
+
+<font size="2" >
+<table style="width:100%">
+ <thead>
+    <tr>
+      <th>Index</th>
+      <th>Name</th>
+      <th>Street</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>Telephone Number</th>
+      <th>Opening Time</th>
+      <th>Closing Time</th>
+      <th>Description</th>
+      <th>Notices</th>
+      <th>Average</th>
+      <th>More About</th>
+    </tr>
+  </thead>
+    <% @places.each_with_index do |place,index| %>
+        <tbody>
+          <td rowspan="1">
+            <%= index %>
+          </td>
+          <td rowspan="1">
+            <%= place.name %>
+          </td>
+          <td rowspan="1">
+            <%= place.street %>
+          </td>
+          <td rowspan="1">
+            <%= place.address %>
+          </td>
+          <td rowspan="1">
+            <%= place.city %>
+          </td>
+          <td rowspan="1">
+            <%= place.telephone_number %>
+          </td>
+          <td rowspan="1">
+            <%= if(!place.opening_time.nil?); place.opening_time.strftime("%H:%M"); else  "-"; end; %>
+          </td>
+          <td rowspan="1">
+            <%= if(!place.closing_time.nil?); place.closing_time.strftime("%H:%M"); else  "-"; end; %>
+          </td>
+          <td rowspan="1">
+            <%= place.description %>
+          </td>
+          <td rowspan="1">
+            <%= place.notices %>
+          </td>
+          <td rowspan='1'>
+            <% for i in 0..(place.average.round-1) do %>
+              <span style="font-size:200%;color:#efe801;">&starf;</span>
+            <% end %>
+          </td>
+          <td rowspan="1">
+            <%= link_to "#{place.name}", place_path(place) %>
+          </td>
+        <% end %>
+        </tbody>
+    </table>
+</font>
+<br/>
+
+<button type="button" class="btn btn-danger" onclick="window.location.href='/places/new'"><a></a><h5>Add new Place</h5></button>
+
