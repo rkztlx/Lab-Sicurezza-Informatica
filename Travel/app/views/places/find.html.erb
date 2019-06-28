@@ -27,6 +27,7 @@
         <th>Closing Time</th>
         <th>Description</th>
         <th>Notices</th>
+        <th>Average</td>
         </tr>
     </thead>
         <% @places.each_with_index do |place,index| %>
@@ -60,6 +61,11 @@
             </td>
             <td rowspan="1">
                 <%= place.notices %>
+            </td>
+            <td rowspan="1">
+                <% for i in 0..(place.average-1) do %>
+                    <span style="font-size:200%;color:#efe801;">&starf;</span>
+                <% end %>
             </td>
             <td rowspan="1">
                 <%= link_to "More about #{place.name}", place_path(place) %>

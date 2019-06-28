@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_28_075435) do
+ActiveRecord::Schema.define(version: 2019_06_28_144819) do
 
   create_table "dislikes", force: :cascade do |t|
     t.integer "review_id"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2019_06_28_075435) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
-    t.float "avarage"
+    t.float "average"
     t.string "icon"
     t.index ["user_id"], name: "index_places_on_user_id"
   end

@@ -11,6 +11,7 @@
             </thead>
         </table>
 
+    <font size="3" >
     <table style="width:100%">
     <thead>
         <tr>
@@ -25,7 +26,9 @@
         <th>Likes</th>
         <th>Dislikes</th>
         <th>Roles</th>
+        <th>More</th>
         </tr>
+
     </thead>
         <% @users.each_with_index do |user,index| %>
         <tbody>
@@ -63,12 +66,12 @@
             <%= user.role_strings.join(',') %>
             </td>
             <td rowspan="1">
-            <%= link_to "More about #{user.name}", user_path(user) %>
+            <%= link_to "#{user.name}", user_path(user) %>
             </td>
         <% end %>
         </tbody>
     </table>
-
+    </font>
 <%else%>
     <h1>You don't have the rights to access this page!</h1>
 <%end%>

@@ -87,13 +87,17 @@
 
 </div>
 
-<table style="width:70%">
+<table style="width:50%">
   <tr>
   <th><% if current_user == @user %>
-    <%= link_to 'Edit info', edit_user_registration_path %>
+    <p><button type="button" class="btn btn-danger" style = "padding: 8px 40px;" onclick="window.location.href='/users/edit'"><a></a><h5>Edit Info</h5></button></p>
   <%end%>
   </th>
 
+  <th>
+  <p><button type="button" class="btn btn-danger" style = "padding: 8px 30px;" onclick="window.location.href='/places'"><a></a><h5>Back to Place List</h5></button></p>
+  </th>
+  
   <th><% if(current_user == @user || (current_user.is?(:admin) && !@user.is?(:admin))) %>
     <%= link_to 'Delete', user_path(@user), :method => :delete, :data => {confirm: 'Are you sure?'} %>
   <%end %>
@@ -108,8 +112,5 @@
   <% end %>
   </th>
   
-  <th>
-  <%= link_to 'Back to Place list', places_path %>
-  </th>
   </tr>
 </table>

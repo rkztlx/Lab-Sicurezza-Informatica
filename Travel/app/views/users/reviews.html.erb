@@ -14,6 +14,7 @@
 
 <% if can? :read, Review %>
   <% if @reviews.any? %>
+    <font size="3" >
     <table style="width:100%">
     <% @reviews.each do |r| %>
     <tbody>
@@ -42,8 +43,9 @@
         </tbody>
     <%end%>
    </table>
+    </font>
   <%else%>
-    <h2>Non ci sono review associate a questo utente</h2>
+    <h2>There aren't reviews associated with that user</h2>
   <%end%>
 <% else %>
     <b>You don't have the centers to read reviews.</b>

@@ -44,7 +44,7 @@
       </li>
       <li>
         Avarage Rating:
-        <%= @place.avarage.round %>
+        <%= @place.average.round %>
       </li>
     </ul>
     <h3>Description:</h3>
@@ -58,7 +58,7 @@
     <h3>Owner Profile:</h3>
     <% if !@place.user.nil? %>
       <p id="owner">
-      <%= link_to 'Owner Profile', user_path(@place.user) %>
+      <p><button type="button" class="btn btn-danger" style = "padding: 6px 10px;" onclick="window.location.href='/users/<%= current_user.id %>'"><a></a><h5>Owner Profile</h5></button></p>
       </p>
     <% else %>
       <p></p>
@@ -88,7 +88,7 @@
       <% dislikes = r.dislikes.count %>
       <% pre_like = r.likes.find { |like| like.user_id == current_user.id} %>
       <% pre_dislike = r.dislikes.find { |dislike| dislike.user_id == current_user.id} %>
-      <b> <%= r.rating %> </b> (<i><%= u.email %></i> - <i><%= link_to 'View profile', user_path(u) %></i>) <%= r.comments %> - <%= likes %> <%= (r.likes.count) == 1 ? 'Like' : 'Likes' %>
+      <h4><b> <%= r.rating %> </b> (<i><%= u.email %></i> - <i><%= link_to 'View profile', user_path(u) %></i>) <%= r.comments %> - <%= likes %> <%= (r.likes.count) == 1 ? 'Like' : 'Likes' %>
       <% if pre_like %>
         <%= link_to "Unlike", place_review_like_path(@place, r, pre_like), :method => :delete %>
       <% else %>
@@ -105,6 +105,7 @@
       <% if u.email==current_user.email %>
         <%= link_to "Edit review", edit_place_review_path(:id => r.id, :place_id => @place.id) %>
       <% end %> <br />
+      </h4>
     <% end %>
   <% else %>
     <b>You don't have the rights to read reviews.</b>
