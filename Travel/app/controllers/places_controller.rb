@@ -40,7 +40,7 @@ class PlacesController < ApplicationController
         respond_to do |client_wants|
             client_wants.html {
                 flash[:notice] = "#{@place.name} was successfully created."
-                redirect_to places_path
+                redirect_to root_path
             }
             client_wants.xml { render :xml => @place.to_xml }
         end
@@ -81,7 +81,7 @@ class PlacesController < ApplicationController
         end
         @place.destroy
         flash[:notice] = "Place #{@place.name} deleted."
-        redirect_to places_path
+        redirect_to root_path
     end
     
     def find
