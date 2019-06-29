@@ -94,9 +94,10 @@ class PlacesController < ApplicationController
     end
     
     def display_route
-        @facilities = params[:facilities].gsub! ' ', '+'
-        @departureAddress = params[:From].gsub! ' ', '+'
-        @desiredDestination = @place.street.gsub! ' ', '+'
+        @facilities = params[:Facilities]
+        @departureAddress = params[:From]
+        @place = Place.find(params[:id])
+        @desiredDestination = @place.street + ', ' + @place.address.to_s + ', ' + @place.city
         # default: render ’display_route’ template
     end
 

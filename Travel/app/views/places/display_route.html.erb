@@ -1,0 +1,160 @@
+<div class="col-md-6">
+      <div id="mapContainer" style="height: 500px; margin: 2%; background: grey" > </div>
+
+</div>
+
+<script type="text/javascript">
+    if (document.readyState=='complete'){
+        location.reload();
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+        var facilities = '<%= @facilities %>'
+        var departureAddress = '<%= @departureAddress %>'
+        var desiredDestination = '<%= @desiredDestination %>'
+        // Instantiate a map and platform object:
+        var platform = new H.service.Platform({
+            'app_id': 'iWmGo2odqif40vyPJakz',
+            'app_code': 'yjAmvBevJLWDokn2otE6Gg'
+        });
+
+        // Create the parameters for the geocoding request:
+        var geocodingParams = {
+            searchText: departureAddress
+        };
+
+        // Define a callback function to process the geocoding response:
+        var onResultDeparture = function(result) {
+            var location = result.Response.View[0].Result[0], position0;
+            position0 = {
+                lat: location.Location.DisplayPosition.Latitude,
+                lng: location.Location.DisplayPosition.Longitude
+            };
+            
+            // Create the parameters for the geocoding request:
+            geocodingParams = {
+                searchText: desiredDestination
+            };
+
+            // Define a callback function to process the geocoding response:
+            var onResult = function(result) {
+                var location = result.Response.View[0].Result[0], position1;
+                position1 = {
+                    lat: location.Location.DisplayPosition.Latitude,
+                    lng: location.Location.DisplayPosition.Longitude
+                }
+                // Retrieve the target element for the map:
+                var targetElement = document.getElementById('mapContainer');
+
+                // Get the default map types from the platform object:
+                var defaultLayers = platform.createDefaultLayers();
+
+                // Instantiate the map:
+                var map = new H.Map(
+                document.getElementById('mapContainer'),
+                defaultLayers.normal.map,
+                {
+                zoom: 10,
+                center: { lat: 52.51, lng: 13.4 }
+                });
+
+                // Create the parameters for the routing request:
+                var mode = facilities == 'Car' ? 'car' : 'publicTransport';
+                var routingParameters = {
+                // The routing mode:
+                    'mode': 'fastest;' + mode, 
+                    // The start point of the route:
+                    'waypoint0': 'geo!' + position0.lat + ',' + position0.lng,
+                    // The end point of the route:
+                    'waypoint1': 'geo!' + position1.lat + ',' + position1.lng,
+                    // To retrieve the shape of the route we choose the route
+                    // representation mode 'display'
+                    'representation': 'display'
+                };
+
+                // Define a callback function to process the routing response:
+                var onResultFinal = function(result) {
+                    var route,
+                        routeShape,
+                        startPoint,
+                        endPoint,
+                        linestring;
+                    if(result.response.route) {
+                    // Pick the first route from the response:
+                    route = result.response.route[0];
+                    // Pick the route's shape:
+                    routeShape = route.shape;
+
+                    // Create a linestring to use as a point source for the route line
+                    linestring = new H.geo.LineString();
+
+                    // Push all the points in the shape into the linestring:
+                    routeShape.forEach(function(point) {
+                        var parts = point.split(',');
+                        linestring.pushLatLngAlt(parts[0], parts[1]);
+                    });
+
+                    // Retrieve the mapped positions of the requested waypoints:
+                    startPoint = route.waypoint[0].mappedPosition;
+                    endPoint = route.waypoint[1].mappedPosition;
+
+                    // Create a polyline to display the route
+                    routeLine = new H.map.Polyline(linestring, {
+                        style: { lineWidth: 10 },
+                        arrows: { fillColor: 'white', frequency: 2, width: 0.8, length: 0.7 }
+                    });
+                    // Create a marker for the start point:
+                    var startMarker = new H.map.Marker({
+                        lat: startPoint.latitude,
+                        lng: startPoint.longitude
+                    });
+
+                    // Create a marker for the end point:
+                    var endMarker = new H.map.Marker({
+                        lat: endPoint.latitude,
+                        lng: endPoint.longitude
+                    });
+
+                    // Add the route polyline and the two markers to the map:
+                    map.addObjects([routeLine, startMarker, endMarker]);
+
+                    // Set the map's viewport to make the whole route visible:
+                    map.setViewBounds(routeLine.getBounds());
+                    }
+                };
+
+                // Get an instance of the routing service:
+                var router = platform.getRoutingService();
+
+                // Call calculateRoute() with the routing parameters,
+                // the callback and an error callback function (called if a
+                // communication error occurs):
+                router.calculateRoute(routingParameters, onResultFinal,
+                function(error) {
+                    alert(error.message);
+                });
+
+
+            };
+
+            // Call the geocode method with the geocoding parameters,
+            // the callback and an error callback function (called if a
+            // communication error occurs):
+            geocoder.geocode(geocodingParams, onResult, function(e) {
+                alert(e);
+            });
+
+        };
+
+        // Get an instance of the geocoding service:
+        var geocoder = platform.getGeocodingService();
+
+        // Call the geocode method with the geocoding parameters,
+        // the callback and an error callback function (called if a
+        // communication error occurs):
+        geocoder.geocode(geocodingParams, onResultDeparture, function(e) {
+            alert(e);
+        });
+    });
+            
+</script>
