@@ -1,29 +1,45 @@
-<div class="col-md-4 box"></div>
 
-<div class="col-md-4 box">
-<h1>Find route</h1>
 
-<br/><br/><br/>
-<div class="container">
-<%= form_tag display_route_path, method: :get do %>
-    <%= label_tag :From %>
-    <%= text_field_tag :From %>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../assets/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link href="../../assets/stylesheets/places/find_route.css" rel="stylesheet">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
+</head>
+
+<div id="logreg-forms">
+
+    <h1 style="text-align:center" class="title"><strong>Find Route</strong></h1>
+    <br/>
+    <div class="field">
+        <%= form_tag display_route_path, method: :get do %>
+            <%= text_field_tag :From, "", class:"form-control", placeholder:"From"%><br/><br/>
+        <div class="form">
+            <div>
+                <%= radio_button_tag :Facilities, "Car", id="radio1", :type=>"radio"%>
+                <%= label_tag :Car %>
+            </div>
+            <div>
+                <%= radio_button_tag :Facilities, "Public Transport", id="radio2", :type=>"radio"%>
+                <%= label_tag 'Public Transport' %>
+            </div>
+        </div>
+        <br/>
+
+        <div style="max-width: 500px; margin: 20px auto;">
+
+        <div class="container">
+            <%= submit_tag "Find", name: nil, :class=>"btn btn-primary btn-block" %>
+        </div>
+
+        <% end %>
+    </div>
+
 </div>
 
-<div class="container">
-    <%= label_tag :Car %>
-    <%= radio_button_tag :Facilities, "Car" %>
-</div>
-
-<div class="container">
-    <%= label_tag 'Public Transport' %>
-    <%= radio_button_tag :Facilities, "Public Transport" %>
-</div>
-
-<div class="container">
-    <%= submit_tag "Find", name: nil %>
-</div>
-
-<% end %>
-</div>
-</div>
