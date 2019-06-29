@@ -86,7 +86,7 @@ class PlacesController < ApplicationController
     
     def find
         @places = Place.where(name: params[:name])
-        authorize! :read, @places, :message => "BEWARE: You are not authorized to find a place."
+        # authorize! :read, @places, :message => "BEWARE: You are not authorized to find a place."
     end
 
     def find_route

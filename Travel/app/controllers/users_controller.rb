@@ -90,7 +90,7 @@ class UsersController < ApplicationController
     def reviews
         @user = User.find(params[:id])
         @reviews = @user.reviews
-        authorize! :read, @reviews, :message => "BEWARE: You are not authorized to read a review."
+        # authorize! :read, @reviews, :message => "BEWARE: You are not authorized to read a review."
         # default: render ’reviews’ template
     end
 

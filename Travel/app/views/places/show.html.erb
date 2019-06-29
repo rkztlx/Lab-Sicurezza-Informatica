@@ -64,17 +64,17 @@
       <p></p>
       No owner for this place...
     <% end %>
+    <h4>
     <%= link_to 'Back to place list', places_path %>
     <%= link_to 'Set as a favorite', set_favorite_path(:id => current_user.id, :place_id => @place.id) %>
     <% if ( current_user.is?(:moderator) || current_user.is?(:admin)) %>
       <%= link_to 'Delete', place_path(@place), :method => :delete, :data => {confirm: 'Are you sure?'}; %>
     <% end %>
-    <%= link_to "Find route", find_route_path %>
+    </h4>
 </div>
 
-<div class="col-md-1 box"></div>
 
-<div class="col-md-7 box">
+<div class="col-md-9 box">
 <%= icon_for @place %>
 <h3>Reviews:</h3>
 <% if @place.reviews.empty? %>
@@ -105,13 +105,14 @@
       <% end %>
       <% if u.email==current_user.email %>
         <%= link_to "Edit review", edit_place_review_path(:id => r.id, :place_id => @place.id) %>
-      <% end %> <br />
-      </h4>
+      <% end %> <br/>
     <% end %>
   <% else %>
     <b>You don't have the rights to read reviews.</b>
   <% end %>
-<% end %>
 <%= link_to 'Add review', new_place_review_path(@place) %>
-<br/><br/> 
+</h4>
+<br/><br/><br/><br/><br/><br/><br/>
+<div align="center"><p><button type="button" class="btn btn-danger" style = "padding: 8px 40px;" onclick="window.location.href='/places/<%= @place.id %>/find_route'"><a></a><h5>Find Route</h5></button></p></div>
+<% end %>
 </div>

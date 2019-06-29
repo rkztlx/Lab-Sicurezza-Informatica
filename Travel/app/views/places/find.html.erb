@@ -12,8 +12,7 @@
             </tr>
             </thead>
         </table>
-
-
+<font size="2">
     <table style="width:100%">
     <thead>
         <tr>
@@ -27,7 +26,8 @@
         <th>Closing Time</th>
         <th>Description</th>
         <th>Notices</th>
-        <th>Average</td>
+        <th>Average</th>
+        <th>More About</th>
         </tr>
     </thead>
         <% @places.each_with_index do |place,index| %>
@@ -68,10 +68,22 @@
                 <% end %>
             </td>
             <td rowspan="1">
-                <%= link_to "More about #{place.name}", place_path(place) %>
+                <%= link_to "#{place.name}", place_path(place) %>
             </td>
             <% end %>
             </tbody>
         </table>
-    <br/>
+    </font>
+    <br/><br/><br/><br/>
+    
+    <div>
+        <table style="width:60%">
+          <thead>
+          </thead>
+          <tbody>
+            <td><h2> Are you an Owner? Register your place </h2></td>
+            <td><button type="button" class="btn btn-danger" style = "padding: 8px 40px;" onclick="window.location.href='/places/new'"><h5>Register Place</h5></button></td>
+          </tbody>
+          </table>
+    </div>
 <%end%>

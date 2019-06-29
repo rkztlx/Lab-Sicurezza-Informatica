@@ -1,11 +1,29 @@
-<h2>Find route</h2>
+<div class="col-md-4 box"></div>
 
+<div class="col-md-4 box">
+<h1>Find route</h1>
+
+<br/><br/><br/>
+<div class="container">
 <%= form_tag display_route_path, method: :get do %>
     <%= label_tag :From %>
     <%= text_field_tag :From %>
+</div>
+
+<div class="container">
     <%= label_tag :Car %>
     <%= radio_button_tag :Facilities, "Car" %>
+</div>
+
+<div class="container">
     <%= label_tag :PublicTransport %>
     <%= radio_button_tag :Facilities, "Public Transport" %>
+</div>
+
+<div class="container">
     <%= submit_tag "Find", name: nil %>
+</div>
+
 <% end %>
+</div>
+</div>
