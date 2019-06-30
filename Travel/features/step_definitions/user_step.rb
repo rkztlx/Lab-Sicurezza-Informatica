@@ -7,6 +7,11 @@ When("The user sign up as {string},{string},{string},{string},{string}") do |ema
    click_button "Sign up"
 end
 
+When("The user create the place as {string},{string},{int},{string}") do |name,street,address,city|
+   Place.create(name: name, street: street, address: address, city: city)
+   find('input[name="Save Changes"]').click
+end
+
 Then("The user should be redirected to {string} page") do |page|
     expect(current_path).to eql page
 end
@@ -34,6 +39,12 @@ When("An user click the {string} button") do |button|
     click_button button
 end
 
-Then("An user should see the {string} button") do |button|
+Then("An user should see the {string}") do |button|
     expect(page).to have_content("Log in")
+end
+
+When("An {string} go to the user+id page") do |email|
+    @user = User.find_by_email(email)
+    @id = @user.id
+    visit "/users/"+@id.to_s
 end
