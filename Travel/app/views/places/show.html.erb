@@ -1,52 +1,72 @@
+	<head>
+	
+		<link href="../../assets/stylesheets/place_info.css" rel="stylesheet">
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+		<link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400" rel="stylesheet">
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="../../vendor/animate/animate.css">
+		<link rel="stylesheet" type="text/css" href="../../vendor/select2/select2.css">
+		<link rel="stylesheet" type="text/css" href="../../vendor/perfect-scrollbar/perfect-scrollbar.css">
+		<link rel="stylesheet" type="text/css" href="../../assets/stylesheets/util.css">
+		<link rel="stylesheet" type="text/css" href="../../assets/stylesheets/main.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	</head>
+
 <div>
-<% if current_user == @place.user %>
-  <button type="button" class="btn btn-danger" onclick="window.location.href='/places/<%= @place.id %>/edit'"><a></a><h5>Modify</h5></button>
-<% end %>
+  <% if current_user == @place.user %>
+    <button type="button" class="btn btn-danger" onclick="window.location.href='/places/<%= @place.id %>/edit'"><a></a><h5>Modify</h5></button>
+  <% end %>
 </div>
 
-<div class="col-md-3 box">
-    <h2>Details about <%= @place.name %> </h2>
-    <ul>
-      <li>Street:
-        <%= @place.street  %>
-      </li>
-      <li>
-        Address:
-        <%= @place.address %>
-      </li>
-      <li>
-        City:
-        <%= @place.city %>
-      </li>
-      <li>
-        Telephone Number:
-        <% if @place.telephone_number != '' %>
-          <%= @place.telephone_number %>
-        <% else %>
-          No telephone number for this place
+<div class="box">
+    <h1 style="text-align:center">Details about <%= @place.name %> </h2> <br/>
+    <div class="divsx">
+      <ul>
+        <li>Street:
+          <%= @place.street  %>
+        </li>
+        <li>
+          Address:
+          <%= @place.address %>
+        </li>
+        <li>
+          City:
+          <%= @place.city %>
+        </li>
+        <li>
+          Telephone Number:
+          <% if @place.telephone_number != '' %>
+            <%= @place.telephone_number %>
+          <% else %>
+            No telephone number for this place
+          <% end %>
+        </li>
+        <li>
+          Opening Time:
+          <% if !@place.opening_time.nil? %>
+            <%= @place.opening_time.strftime("%H:%M") %>
+          <% else %>
+            No opening time for this place
         <% end %>
-      </li>
-      <li>
-        Opening Time:
-        <% if !@place.opening_time.nil? %>
-          <%= @place.opening_time.strftime("%H:%M") %>
-        <% else %>
-          No opening time for this place
-      <% end %>
-      </li>
-      <li>
-        Closing Time:
-        <% if !@place.closing_time.nil? %>
-          <%= @place.closing_time.strftime("%H:%M") %>
-        <% else %>
-          No closing time for this place
-        <% end %>
-      </li>
-      <li>
-        Average Rating:
-        <%= @place.average.round %>
-      </li>
-    </ul>
+        </li>
+        <li>
+          Closing Time:
+          <% if !@place.closing_time.nil? %>
+            <%= @place.closing_time.strftime("%H:%M") %>
+          <% else %>
+            No closing time for this place
+          <% end %>
+        </li>
+        <li>
+          Average Rating:
+          <%= @place.average.round %>
+        </li>
+      </ul>
+    
     <h3>Description:</h3>
     <p id="description">
     <%= @place.description %>
@@ -64,17 +84,19 @@
       <p></p>
       No owner for this place...
     <% end %>
-    <h4>
-    <%= link_to 'Back to place list', places_path %>
-    <%= link_to 'Set as a favorite', set_favorite_path(:id => current_user.id, :place_id => @place.id) %>
-    <% if ( current_user.is?(:moderator) || current_user.is?(:admin)) %>
-      <%= link_to 'Delete', place_path(@place), :method => :delete, :data => {confirm: 'Are you sure?'}; %>
-    <% end %>
+      <h4>
+      <%= link_to 'Back to place list', places_path %>
+      <%= link_to 'Set as a favorite', set_favorite_path(:id => current_user.id, :place_id => @place.id) %>
+      <% if ( current_user.is?(:moderator) || current_user.is?(:admin)) %>
+        <%= link_to 'Delete', place_path(@place), :method => :delete, :data => {confirm: 'Are you sure?'}; %>
+      <% end %>
     </h4>
 </div>
 
 
-<div class="col-md-9 box">
+
+
+<div class="divdx box">
 <%= icon_for @place %>
 <h3>Reviews:</h3>
 <% if @place.reviews.empty? %>
@@ -114,5 +136,6 @@
 </h4>
 <br/><br/><br/><br/><br/><br/><br/>
 <% end %>
-<div align="center"><p><button type="button" class="btn btn-danger" style = "padding: 8px 40px;" onclick="window.location.href='/places/<%= @place.id %>/find_route'"><a></a><h5>Find Route</h5></button></p></div>
+<br/>
+  <button type="button" class="btn btn-danger" style = "padding: 8px 40px;" onclick="window.location.href='/places/<%= @place.id %>/find_route'"><h5>Find Route</h5></button>
 </div>

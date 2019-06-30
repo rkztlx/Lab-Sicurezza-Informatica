@@ -123,14 +123,17 @@ hr.line { background-color:#dbdbdb; width:80%; margin:0 auto; }
 .contenitore2 div{float:left;}
 
 .divsx{
-	width:232px;
+    float: left;
+	width: 400px;;
 }
 
 .divcentro {
-	width:300px;
+	width:400px;
 }
 
 .divdx{
-	width:232px;
+    float: right !important;
+    width:400px;
+    height: auto;
 }
 
