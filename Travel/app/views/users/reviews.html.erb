@@ -38,7 +38,7 @@
         
           <td rowspan="1"><%= link_to "Delete review", place_review_path(:id => r.id, :place_id => r.place.id), :method => :delete, :data => {confirm: 'Are you sure?'} %></td>
           <td rowspan="1"><%= link_to "Edit review", edit_place_review_path(:id => r.id, :place_id => r.place.id) %></td>
-          <td rowspan="1"><%= link_to 'Back to place list', places_path %></td>
+          <td rowspan="1"><%= link_to 'Back to Home Page', root_path %></td>
           <td rowspan="1"><%= "To the place: " %> <%= link_to "#{r.place.name}", place_path(r.place) %></td>
         </tbody>
     <%end%>

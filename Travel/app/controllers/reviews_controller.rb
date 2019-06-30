@@ -36,7 +36,11 @@ class ReviewsController < ApplicationController
     def update
         @review = Review.find params[:id]
         authorize! :update, @review, :message => "BEWARE: You are not authorized to update a review."
+        @place = @review.place
+        @place.average = @place.average * @place.reviews.count - @review.rating
         @review.update_attributes!(params[:review].permit(:rating, :comments))
+        @place.average = (@place.average + @review.rating) / @place.reviews.count
+        @place.save!
         respond_to do |client_wants|
             client_wants.html {
                 flash[:notice] = "Review was successfully added."
@@ -51,7 +55,13 @@ class ReviewsController < ApplicationController
 		id_place = params[:place_id]
         @place = Place.find(id_place)
         @review = Review.find(id)
-		authorize! :destroy, @review, :message => "BEWARE: You are not authorized to delete a review."
+        authorize! :destroy, @review, :message => "BEWARE: You are not authorized to delete a review."
+        if @place.reviews.count == 1
+            @place.average = 0
+        else
+            @place.average = (@place.average * @place.reviews.count - @review.rating) / (@place.reviews.count - 1)
+        end
+        @place.save!
 		@review.destroy
 		flash[:notice] = "Your review has been deleted."
 		redirect_to request.referer

@@ -69,11 +69,19 @@
     
     <h3>Description:</h3>
     <p id="description">
-    <%= @place.description %>
+    <% if !@place.description.nil? %>
+      <%= @place.description %>
+    <% else %>
+      No description for this place
+    <% end %>
     </p>
     <h3>Notices:</h3>
     <p id="notices">
-    <%= @place.notices %>
+    <% if !@place.notices.nil? %>
+      <%= @place.notices %>
+    <% else %>
+      No notices for this place
+    <% end %>
     </p>
     <h3>Owner Profile:</h3>
     <% if !@place.user.nil? %>
@@ -85,11 +93,13 @@
       No owner for this place...
     <% end %>
       <h4>
-      <%= link_to 'Back to place list', places_path %>
+      <%= link_to 'Back to Home Page', root_path %>
       <%= link_to 'Set as a favorite', set_favorite_path(:id => current_user.id, :place_id => @place.id) %>
       <% if ( current_user.is?(:moderator) || current_user.is?(:admin)) %>
         <%= link_to 'Delete', place_path(@place), :method => :delete, :data => {confirm: 'Are you sure?'}; %>
       <% end %>
+      <br/>
+      <%= link_to 'Add review', new_place_review_path(@place) %>
     </h4>
 </div>
 
@@ -132,10 +142,9 @@
   <% else %>
     <b>You don't have the rights to read reviews.</b>
   <% end %>
-<%= link_to 'Add review', new_place_review_path(@place) %>
 </h4>
 <br/><br/><br/><br/><br/><br/><br/>
 <% end %>
 <br/>
-  <button type="button" class="btn btn-danger" style = "padding: 8px 40px;" onclick="window.location.href='/places/<%= @place.id %>/find_route'"><h5>Find Route</h5></button>
+<button type="button" class="btn btn-danger" style = "padding: 8px 40px;" onclick="window.location.href='/places/<%= @place.id %>/find_route'"><h5>Find Route</h5></button>
 </div>

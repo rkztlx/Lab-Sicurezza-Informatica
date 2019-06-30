@@ -45,19 +45,19 @@
             <%= place.city %>
           </td>
           <td rowspan="1">
-            <%= place.telephone_number %>
+            <%= if(place.telephone_number != ''); place.telephone_number; else "Unreported"; end; %>
           </td>
           <td rowspan="1">
-            <%= if(!place.opening_time.nil?); place.opening_time.strftime("%H:%M"); else  "-"; end; %>
+            <%= if(!place.opening_time.nil?); place.opening_time.strftime("%H:%M"); else  "Unreported"; end; %>
           </td>
           <td rowspan="1">
-            <%= if(!place.closing_time.nil?); place.closing_time.strftime("%H:%M"); else  "-"; end; %>
+            <%= if(!place.closing_time.nil?); place.closing_time.strftime("%H:%M"); else  "Unreported"; end; %>
           </td>
           <td rowspan="1">
-            <%= place.description %>
+            <%= if(place.description != ''); place.description; else "Unreported"; end; %>
           </td>
           <td rowspan="1">
-            <%= place.notices %>
+            <%= if(place.notices != ''); place.notices; else "Unreported"; end; %>
           </td>
           <td rowspan='1'>
             <% for i in 0..(place.average.round-1) do %>
