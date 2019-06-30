@@ -2,6 +2,7 @@
 /* CSS Document */
 
 body { 
+    background-image: url(../dark.jpg) !important;
 	min-width:200px; margin: 0 auto; font-family: 'Raleway', sans-serif;
 	background-size: cover; 
 	background-attachment:fixed; 

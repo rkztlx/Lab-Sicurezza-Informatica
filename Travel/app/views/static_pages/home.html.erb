@@ -1,10 +1,10 @@
-<link rel="stylesheet" href="../../assets/stylesheets/static_pages/Homepage.css">
+<link rel="stylesheet" href="../../assets/static_pages/Homepage.css">
 
 <% if ( !current_user.nil? && current_user.is?(:banned)) %>
     <h1> You was Banned, you can't acces the site </h1>
 <%else%>
 
-    <h1 style="text-align:center"><strong>Travel with Us!!</strong></h1><br>
+    <h1 style="text-align:center"><strong><font color="white">Travel with Us!!</font></strong></h1><br>
     <div id="search">
         <%= form_tag find_place_path, method: :get do %>
             <%= text_field_tag 'name',nil, placeholder: 'Find a place', size:37, :class=>"form-control", id:"inputEmail" %>
@@ -12,6 +12,7 @@
             <%= submit_tag 'Search', :class=>"btn btn-danger btn-block action" %>
         <%end%>
     </div>
+    <br/>
         <div class="box">
             <div align="center">
             
