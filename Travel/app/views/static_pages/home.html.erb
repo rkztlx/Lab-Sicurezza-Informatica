@@ -7,9 +7,9 @@
     <h1 style="text-align:center"><strong><font color="white">Travel with Us!!</font></strong></h1><br>
     <div id="search">
         <%= form_tag find_place_path, method: :get do %>
-            <%= text_field_tag 'name',nil, placeholder: 'Find a place', size:37, :class=>"form-control", id:"inputEmail" %>
+            <%= text_field_tag 'name',nil, placeholder: 'Find a place', size:37, :class=>"form-control", id:"ser" %>
             <br/>
-            <%= submit_tag 'Search', :class=>"btn btn-danger btn-block action" %>
+            <%= submit_tag 'Search', id:"searchsub", :class=>"btn btn-danger btn-block action" %>
         <%end%>
     </div>
     <br/>

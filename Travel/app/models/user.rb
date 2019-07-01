@@ -1,7 +1,7 @@
 class User < ApplicationRecord
 
   before_create :set_default_role
-  after_create :set_num_likes_dislikes
+  before_create :set_num_likes_dislikes
   has_many :reviews
   has_many :places, :through => :reviews
   belongs_to :favorite_place  , optional: true, class_name: 'Place'
