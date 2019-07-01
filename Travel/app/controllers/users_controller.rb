@@ -17,7 +17,7 @@ class UsersController < ApplicationController
             @user = User.find(id) # look up id bi unique ID
             authorize! :read, @user, :message => "BEWARE: You are not authorized to read an user."
         rescue ActiveRecord::RecordNotFound
-            redirect_to :controller => "users", :action => "index"
+            redirect_to root_path
             flash[:warning] = "There is no user with that index"
             return
         end
