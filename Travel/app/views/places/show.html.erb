@@ -18,7 +18,7 @@
 
 <div>
   <% if current_user == @place.user %>
-    <button type="button" class="btn btn-danger" onclick="window.location.href='/places/<%= @place.id %>/edit'"><a></a><h5>Modify</h5></button>
+    <button type="button" class="btn btn-danger" onclick="window.location.href='/places/<%= @place.id %>/edit'">Modify</button>
   <% end %>
 </div>
 

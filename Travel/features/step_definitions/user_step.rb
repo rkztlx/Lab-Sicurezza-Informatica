@@ -27,10 +27,12 @@ end
 
 
 Then("The user should be to redirect to {string}") do |page|
-    expect(current_path).to eql page
+    page.driver.browser.switch_to.alert.accept
 end
 
 When("An user click the {string} button") do |button|
     click_button button
 end
+
+
   
