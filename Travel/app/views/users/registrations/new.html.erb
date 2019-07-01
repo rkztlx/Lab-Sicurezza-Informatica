@@ -22,7 +22,7 @@
         <%= f.password_field :password, autocomplete: "new-password", :class => "form-control", placeholder: "Password" %>
       </div><br/>
 
-      <%= f.password_field :password, autocomplete: "new-password", :class => "form-control", placeholder: "Password Confirmation" %><br/>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => "form-control", placeholder: "Password Confirmation" %><br/>
 
       <%= f.text_field :name, :class => "form-control", placeholder: "Name" %>
       <br/>
@@ -30,12 +30,6 @@
       <br/>
       <%= f.text_field :nickname, :class => "form-control", placeholder: "Nickname" %>
       <br/>
-      <div class="field">
-        <%= f.label :birth_date %><br />
-        <%= f.date_select :birth_date, { start_year: 100.years.ago.year, end_year: Date.today.year, default: Date.today} %>
-      </div><br/>
-
-      <%= f.text_area :bio, cols: 30, rows:10, :class=>"form-control", placeholder:"Bio"%><br/>
 
       <div class="actions">
         <%= f.submit "Sign up", :class=>"btn btn-success btn-block" %>

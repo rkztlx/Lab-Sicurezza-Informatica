@@ -1,8 +1,8 @@
 Feature: USER features
   
-  Scenario: As an UNREGISTERED USER I want to SIGN UP WITH EMAIL
-    Given no user exists with an email of "email@user.com"
-    When An user go to the "/users/sign_up" page
-    And The user sign in as "email@user.com", "password","password","pippo","franco","pippo1"
-    Then The user should be to redirect to "/static_pages/home"
+  Scenario: As an UNREGISTERED USER I want to DISPLAY THE SIGN IN PAGE
+    Given no user exists with an email of "email@person.com"
+    When An user go to the "/static_pages/home" page
+    And An user click the "Search" button
+    Then The user should be to redirect to "/users/sign_in"
 

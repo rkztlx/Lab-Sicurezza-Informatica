@@ -95,8 +95,11 @@
       <h4>
       <%= link_to 'Back to Home Page', root_path %>
       <%= link_to 'Set as a favorite', set_favorite_path(:id => current_user.id, :place_id => @place.id) %>
-      <% if ( current_user.is?(:moderator) || current_user.is?(:admin)) %>
+      <% if ( current_user.is?(:moderator) || current_user.is?(:admin) || current_user == @place.user) %>
         <%= link_to 'Delete', place_path(@place), :method => :delete, :data => {confirm: 'Are you sure?'}; %>
+      <% end %>
+      <% if current_user == @place.user %>
+        <%= link_to 'Edit', edit_place_path(@place) %>
       <% end %>
       <br/>
       <%= link_to 'Add review', new_place_review_path(@place) %>
