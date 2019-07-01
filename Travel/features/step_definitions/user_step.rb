@@ -72,3 +72,23 @@ When("An user search for {string} place") do |place|
    find("#searchsub").click()
 end
 
+
+When("An user clik {string}") do |string|
+    click_link string
+end
+
+When("insert a {string} comment") do |element|
+   find("#com").set(element)
+   find("#sav").click()
+end
+
+Then("Like increase") do
+   @review = Review.last
+   @review.likes.count == 1
+end
+
+Then("Dislike increase") do
+   @review = Review.last
+   @review.dislikes.count == 1
+end
+

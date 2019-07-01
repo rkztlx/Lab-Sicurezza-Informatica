@@ -36,16 +36,6 @@ Feature: USER features
     When An "email@user.com" go to the user+id page
     Then An user should see the "Favorite Place"
 
-  Scenario: As a USER I want to ADD REVIEWS TO PLACES so that ANOTHER USERS CAN SEE my REVIEWS
-    Given A registered user as "email@user.com","password" 
-    When An "email@user.com" go to the user+id page
-
-  Scenario: As a USER I want to ADD LIKE to review so that the like count increase
-
-  Scenario: As a USER I want to ADD DISLIKE to review so that the dislike count increase
-  
-  Scenario: As a USER I want to SEE all REVIEWS made by me so that I CAN MODIFY them.
-
   Scenario: As a USER I want to INSERT a PLACE so that it CAN BE FOUND and REVIEWED by other USERS and that I am REGISTERED as the OWNER
     Given A registered user as "email@user.com","password"
     When An user go to the "/places/new" page
@@ -58,5 +48,42 @@ Feature: USER features
     When An user go to the "/static_pages/home" page
     When An user search for "Place1" place
     Then An user should see the "Place1"
+    
+  Scenario: As a USER I want to ADD REVIEWS TO PLACES so that ANOTHER USERS CAN SEE my REVIEWS
+    Given A registered user as "email@user.com","password"
+    Given "Place1","Via Prova",1,"Rome" place exist 
+    When An user go to the "/places/1" page
+    And An user clik "Add review"
+    And insert a "prova" comment
+    Then The user should be redirected to "/places/1" page
+
+  Scenario: As a USER I want to ADD LIKE to review so that the like count increase
+    Given A registered user as "email@user.com","password"
+    Given "Place1","Via Prova",1,"Rome" place exist 
+    When An user go to the "/places/1" page
+    And An user clik "Add review"
+    And insert a "prova" comment
+    Then The user should be redirected to "/places/1" page
+    When An user click the "Like"
+    Then Like increase
+
+  Scenario: As a USER I want to ADD DISLIKE to review so that the dislike count increase
+    Given A registered user as "email@user.com","password"
+    Given "Place1","Via Prova",1,"Rome" place exist 
+    When An user go to the "/places/1" page
+    And An user clik "Add review"
+    And insert a "prova" comment
+    Then The user should be redirected to "/places/1" page
+    When An user click the "Disike"
+    Then Dislike increase
+  
+  Scenario: As a USER I want to SEE all REVIEWS made by me so that I CAN MODIFY them.
+    Given A registered user as "email@user.com","password"
+    Given "Place1","Via Prova",1,"Rome" place exist 
+    When An user go to the "/places/1" page
+    And An user clik "Add review"
+    And insert a "prova" comment
+    When An user go to the "/places/my_reviews/1" page
+    Then An user should see the "Reviews of"
     
     

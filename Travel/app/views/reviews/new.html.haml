@@ -3,7 +3,7 @@
 = form_tag place_reviews_path, :method => :post do
  
   = render :partial => 'review_form'
-  = submit_tag 'Save Changes'
+  = submit_tag 'Save Changes', :id => 'sav'
 
 = link_to 'Cancel', place_path(:id => params[:place_id])
 
