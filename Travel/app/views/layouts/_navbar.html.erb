@@ -44,14 +44,14 @@
   &nbsp;&nbsp;
 
 <% if !user_signed_in? %>
-    <button type="button" class="btn btn-danger" onclick="window.location.href='/users/sign_in'"><a> &nbsp; </a>Sign In</button>
+    <button type="button" class="btn btn-danger" onclick="window.location.href='/users/sign_in'">Sign In</button>
 <% end %>
 
 
 <% if user_signed_in? %>
   <div class="d-flex">
     <div class="btn-group">
-      <a class="btn btn-danger" href="/users/sign_out" data-method="delete"> &nbsp; Log Out</a>
+      <a class="btn btn-danger" type='submit' id="logo" href="/users/sign_out" data-method="delete">Log Out</a>
       </div>
     </div>
   </div>
