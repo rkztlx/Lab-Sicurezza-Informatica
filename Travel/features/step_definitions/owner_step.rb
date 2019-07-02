@@ -1,5 +1,3 @@
-Capybara.current_driver = :webkit
-
 Given("A registered owner as {string},{string}") do |email, password|
     User.create(email: email, password: password, password_confirmation: password)
     visit new_user_session_path

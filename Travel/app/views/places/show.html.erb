@@ -18,7 +18,7 @@
 
 <div>
   <% if current_user == @place.user %>
-    <button type="button" class="btn btn-danger" onclick="window.location.href='/places/<%= @place.id %>/edit'">Modify</button>
+    <button type="button" id="Prova" class="btn btn-danger" onclick="window.location.href='/places/<%= @place.id %>/edit'">Modify</button>
   <% end %>
 </div>
 
@@ -135,7 +135,7 @@
       <% else %>
         <%= link_to 'Dislike', place_review_dislikes_path(@place, r), :method => :post %>
       <% end %>
-      <% if u.email==current_user.email %>
+      <% if(u.email==current_user.email || current_user.is?(:admin) || current_user.is?(:moderator)) %>
         <%= link_to "Delete review", place_review_path(:id => r.id, :place_id => @place.id), :method => :delete, :data => {confirm: 'Are you sure?'} %>
       <% end %>
       <% if u.email==current_user.email %>

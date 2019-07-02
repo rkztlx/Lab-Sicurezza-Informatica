@@ -52,19 +52,23 @@ class ReviewsController < ApplicationController
 
     def destroy
         id = params[:id]
-		id_place = params[:place_id]
-        @place = Place.find(id_place)
         @review = Review.find(id)
-        authorize! :destroy, @review, :message => "BEWARE: You are not authorized to delete a review."
-        if @place.reviews.count == 1
-            @place.average = 0
+        if(current_user == @review.user || current_user.is?(:moderator) || current_user.is?(:admin))
+            id_place = params[:place_id]
+            @place = Place.find(id_place)
+            authorize! :destroy, @review, :message => "BEWARE: You are not authorized to delete a review."
+            if @place.reviews.count == 1
+                @place.average = 0
+            else
+                @place.average = (@place.average * @place.reviews.count - @review.rating) / (@place.reviews.count - 1)
+            end
+            @place.save!
+            @review.destroy
+            flash[:notice] = "The review of #{@review.user.email} has been deleted."
         else
-            @place.average = (@place.average * @place.reviews.count - @review.rating) / (@place.reviews.count - 1)
+            flash[:warning] = "You cannot delete the review of another user"
         end
-        @place.save!
-		@review.destroy
-		flash[:notice] = "Your review has been deleted."
-		redirect_to request.referer
+        redirect_to request.referer
     end
 
 end
