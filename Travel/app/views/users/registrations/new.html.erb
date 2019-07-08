@@ -4,9 +4,9 @@
 
 <div id="logreg-forms">
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class:"form-signup") do |f| %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
-  <button type='button' class='btn facebook-btn social-btn btn-block' onclick="window.location.href = '/users/auth/facebook'" id="fbbtn">Sign in with Facebook</button><br />
+<a href="/users/auth/facebook"><button type='button' class='btn facebook-btn social-btn' style = "padding: 8px 75px;"><i class='fa fa-facebook'></i>  &nbsp; Sign in with Facebook</button></a><br />
   <h2 class="card-header bg-dark text-white" style="text-align: center">Sign Up</h2><br/>
 
   <div>
@@ -21,7 +21,7 @@
           <% end %><br />
         <%= f.password_field :password, autocomplete: "new-password", :class => "form-control", placeholder: "Password" %>
       </div><br/>
-      
+
       <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => "form-control", placeholder: "Password Confirmation" %><br/>
 
       <%= f.text_field :name, :class => "form-control", placeholder: "Name" %>
@@ -30,13 +30,6 @@
       <br/>
       <%= f.text_field :nickname, :class => "form-control", placeholder: "Nickname" %>
       <br/>
-
-      <div class="field">
-        <%= f.label :birth_date %><br />
-        <%= f.date_select :birth_date, { start_year: 100.years.ago.year, end_year: Date.today.year, default: Date.today} %>
-      </div><br/>
-
-      <%= f.text_area :bio, cols: 30, rows:10, :class=>"form-control", placeholder:"Bio"%><br/>
 
       <div class="actions">
         <%= f.submit "Sign up", :class=>"btn btn-success btn-block" %>
